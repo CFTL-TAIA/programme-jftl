@@ -1,4 +1,4 @@
-export const githubProjectUrl = 'https://github.com/CFTL-TAIA/programmeJftl';
+export const githubProjectUrl = 'https://github.com/CFTL-TAIA/programme-jftl';
 export const programmeTitle = 'PROGRAMME DE LA JFTL 2026';
 
 function getSiteRootUrl() {
