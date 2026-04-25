@@ -50,7 +50,7 @@ Point de fiabilite a retenir : il n'est pas possible d'executer une vraie API No
 Ce fichier doit etre enrichi aux prochaines demandes significatives de la session avec :
 
 - le prompt utilisateur
-- la reponse finale fournie
+- la reponse finale fourni
 
 Les reflexions intermediaires ne sont pas necessaires.
 
