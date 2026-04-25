@@ -210,4 +210,50 @@ Verification locale minimale des mots de passe :
 
 La configuration Vercel est definie dans `vercel.json`.
 
+### Cohabitation GitHub Pages + API Vercel
+
+Le front statique peut etre publie sur GitHub Pages tandis que les endpoints `/api/*` restent executes sur Vercel.
+
+Montage retenu dans ce projet :
+
+- GitHub Pages sert l'interface statique sous `https://cftl-taia.github.io/programme-jftl/`
+- Vercel sert l'API serverless sous `https://programme-jftl.vercel.app/api/*`
+- le front detecte automatiquement l'hebergement `github.io` et redirige alors ses appels API vers Vercel
+- Swagger publie sur GitHub Pages pointe egalement vers l'origine Vercel pour `Try it out`
+
+Point d'attention :
+
+- si l'URL Vercel change plus tard (par exemple avec un domaine personnalise), il faudra mettre a jour l'origine d'API de repli dans `src/site/assets/shared.js` et `docs/Swagger/index.html`
+- les headers CORS de l'API autorisent actuellement l'origine GitHub Pages `https://cftl-taia.github.io` ainsi que l'URL Vercel du projet
+
+### Ajouter les variables d'environnement sur Vercel
+
+Une fois le projet cree et deploye sur Vercel, il faut definir les secrets admin dans le dashboard :
+
+1. Ouvrir le projet dans Vercel.
+2. Aller dans `Settings`.
+3. Aller dans `Environments` 
+4. Choisir au minimum l'environnement `Production`.
+5. Ouvrir la section `Environment Variables`.
+6. Ajouter la variable `TAIA_ADMIN_EDITOR_PASSWORD`.
+7. Saisir la valeur du mot de passe correspondant au scope 
+8. Ajouter ensuite la variable `TAIA_ADMIN_SUPER_PASSWORD`.
+9.  Saisir la valeur du mot de passe correspondant au scope `admin-plus`.
+10. Choisir au minimum l'environnement `Production`.
+8.  Enregistrer.
+9.  Relancer un deploiement pour que les fonctions serverless prennent bien en compte ces nouvelles variables.
+
+Recommandation pratique :
+
+- configurer aussi ces deux variables pour `Preview` si vous voulez tester l'admin sur les branches ou les pull requests
+- ne jamais stocker ces valeurs dans le depot Git
+
+Verification apres configuration :
+
+1. Ouvrir l'URL Vercel du projet.
+2. Verifier que `GET /api/admin/token` repond correctement.
+3. Ouvrir `/admin/`.
+4. Saisir le mot de passe `editor` pour verifier l'acces a `Modifier`.
+5. Saisir le mot de passe `admin-plus` pour verifier l'acces a `Modifier`, `Creer` et `Supprimer`.
+
 La documentation detaillee est disponible dans `docs/Vercel.md`.

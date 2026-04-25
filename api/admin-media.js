@@ -1,4 +1,4 @@
-import { readRequestBody, sendBadRequest, sendJson, sendMethodNotAllowedFor, sendServerError, sendUnauthorized } from '../lib/api-service.mjs';
+import { applyCorsHeaders, readRequestBody, sendBadRequest, sendCorsPreflight, sendJson, sendMethodNotAllowedFor, sendServerError, sendUnauthorized } from '../lib/api-service.mjs';
 import { saveAdminMedia } from '../lib/admin-media.mjs';
 import { getBearerToken, requireAdminPermission, verifyAdminToken } from '../lib/admin-auth.mjs';
 
@@ -9,6 +9,13 @@ function requireAdminJwt(request) {
 }
 
 export default async function handler(request, response) {
+  applyCorsHeaders(request, response, ['POST', 'OPTIONS']);
+
+  if (request.method === 'OPTIONS') {
+    sendCorsPreflight(request, response, ['POST', 'OPTIONS']);
+    return;
+  }
+
   if (request.method !== 'POST') {
     sendMethodNotAllowedFor(response, ['POST']);
     return;

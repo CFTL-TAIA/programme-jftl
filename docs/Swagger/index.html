@@ -292,6 +292,10 @@ ${indent}]`;
       }
 
       async function bootstrapSwagger() {
+        const apiOrigin = window.location.hostname.endsWith('github.io')
+          ? 'https://programme-jftl.vercel.app'
+          : window.location.origin;
+
         if ('serviceWorker' in navigator) {
           const registrations = await navigator.serviceWorker.getRegistrations();
 
@@ -305,8 +309,12 @@ ${indent}]`;
           }
         }
 
+        const openApiResponse = await fetch('./openapi.json');
+        const spec = await openApiResponse.json();
+        spec.servers = [{ url: apiOrigin }];
+
         window.ui = SwaggerUIBundle({
-          url: './openapi.json',
+          spec,
           dom_id: '#swagger-ui',
           deepLinking: true,
           tryItOutEnabled: true,

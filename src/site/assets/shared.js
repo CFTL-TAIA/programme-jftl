@@ -1,10 +1,25 @@
 export const githubProjectUrl = 'https://github.com/CFTL-TAIA/programme-jftl';
 export const programmeTitle = 'PROGRAMME DE LA JFTL 2026';
+const defaultApiOrigin = 'https://programme-jftl.vercel.app';
 
 function getSiteRootUrl() {
   const rootLink = document.querySelector('.site-nav a[href], .site-header .brand[href]');
 
   return new URL(rootLink?.getAttribute('href') || './', window.location.href);
+}
+
+function getApiOrigin() {
+  const configuredOrigin = document.documentElement.dataset.apiOrigin || '';
+
+  if (configuredOrigin) {
+    return configuredOrigin.replace(/\/+$/, '');
+  }
+
+  if (window.location.hostname.endsWith('github.io')) {
+    return defaultApiOrigin;
+  }
+
+  return window.location.origin;
 }
 
 export function resolveSiteUrl(path) {
@@ -16,6 +31,10 @@ export function resolveSiteUrl(path) {
 
   if (/^[a-z]+:/i.test(value) || value.startsWith('//')) {
     return value;
+  }
+
+  if (value.startsWith('/api/')) {
+    return new URL(value.replace(/^\/+/, ''), `${getApiOrigin()}/`).toString();
   }
 
   return new URL(value.replace(/^\/+/, ''), getSiteRootUrl()).toString();

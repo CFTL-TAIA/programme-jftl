@@ -1,7 +1,14 @@
-import { readRequestBody, sendBadRequest, sendJson, sendMethodNotAllowedFor, sendServerError } from '../lib/api-service.mjs';
+import { applyCorsHeaders, readRequestBody, sendBadRequest, sendCorsPreflight, sendJson, sendMethodNotAllowedFor, sendServerError } from '../lib/api-service.mjs';
 import { getAdminPasswordHint, issueAdminToken } from '../lib/admin-auth.mjs';
 
 export default async function handler(request, response) {
+  applyCorsHeaders(request, response, ['GET', 'POST', 'OPTIONS']);
+
+  if (request.method === 'OPTIONS') {
+    sendCorsPreflight(request, response, ['GET', 'POST', 'OPTIONS']);
+    return;
+  }
+
   if (request.method === 'GET') {
     sendJson(response, getAdminPasswordHint());
     return;
