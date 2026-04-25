@@ -1,5 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run vercel-build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/admin/token",
+      "destination": "/api/admin-token"
+    },
+    {
+      "source": "/api/admin/media",
+      "destination": "/api/admin-media"
+    }
+  ]
 }
