@@ -1463,16 +1463,9 @@
                       "prenom": "Fanny",
                       "photo": "/BDD/photos/fanny-velsin.jpg",
                       "entreprise": "ent-non-communique"
-                    },
-                    {
-                      "id": "spk-ami-kael",
-                      "nom": "kael",
-                      "prenom": "amistache",
-                      "photo": "https://y2ybxeyykio65b8g.public.blob.vercel-storage.com/medias/photos/ami-kael.jpg",
-                      "entreprise": "ent-agilitest"
                     }
                   ],
-                  "total": 38,
+                  "total": 37,
                   "filters": {
                     "id": null,
                     "nom": null,

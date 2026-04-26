@@ -5,7 +5,7 @@
   "description": "API de test TAIA avec front statique et API serverless compatible Vercel",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": "24.x"
   },
   "scripts": {
     "db:down": "docker compose -f docker-compose.postgres.yml down",
