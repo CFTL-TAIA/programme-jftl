@@ -183,7 +183,7 @@ const adminHintSchema = objectSchema(
       )
     },
     helperCommand: stringProperty('Commande locale d’aide pour générer un JWT si les variables sont configurées.', 'npm run admin-token'),
-    requiredEnvironment: arrayProperty('Variables d’environnement nécessaires côté serveur.', stringProperty('Nom de variable.'), ['TAIA_ADMIN_EDITOR_PASSWORD', 'TAIA_ADMIN_SUPER_PASSWORD', 'DATABASE_URL'])
+    requiredEnvironment: arrayProperty('Variables d’environnement nécessaires côté serveur.', stringProperty('Nom de variable.'), ['TAIA_ADMIN_EDITOR_PASSWORD', 'TAIA_ADMIN_SUPER_PASSWORD', 'taia_bdd_DATABASE_URL'])
   }
 );
 

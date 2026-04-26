@@ -24,7 +24,7 @@ La solution mise en place ici est donc la suivante :
 
 Point de fiabilite : les requetes API sont maintenant reelles en local et sur Vercel, donc testables depuis Bruno, Postman, Karate ou Swagger sans mock navigateur.
 
-Point de fiabilite a signaler : les donnees metier utilisent maintenant Postgres via `DATABASE_URL`, en production comme en developpement. Vercel Blob est conserve pour les medias uniquement. Les JSON versionnes dans `BDD/` restent une source de seed mais ne sont plus utilises comme persistance runtime.
+Point de fiabilite a signaler : les donnees metier utilisent maintenant Postgres via `taia_bdd_DATABASE_URL` en priorite, avec `DATABASE_URL` encore accepte comme alias. Vercel Blob est conserve pour les medias uniquement. Les JSON versionnes dans `BDD/` restent une source de seed mais ne sont plus utilises comme persistance runtime.
 
 ## Configuration admin
 
@@ -34,7 +34,7 @@ Variables d'environnement attendues cote serveur :
 
 - `TAIA_ADMIN_EDITOR_PASSWORD` : ouvre le scope `editor` et autorise `PUT`
 - `TAIA_ADMIN_SUPER_PASSWORD` : ouvre le scope `admin-plus` et autorise `POST`, `PUT`, `DELETE`
-- `DATABASE_URL` : active la persistance Postgres des donnees metier (`conference`, `speaker`, `salle`, `entreprise`) pour l'environnement courant
+- `taia_bdd_DATABASE_URL` : active la persistance Postgres des donnees metier (`conference`, `speaker`, `salle`, `entreprise`) pour l'environnement courant. `DATABASE_URL` reste accepte comme alias.
 - `taia_READ_WRITE_TOKEN` : active le stockage public des medias via le store Blob `taia-fichier`
 
 En local, le projet charge automatiquement un fichier `.env.local` a la racine si present.
@@ -47,8 +47,8 @@ Flux recommande en local :
 1. Copier `.env.local.example` vers `.env.local`.
 2. Choisir votre base de developpement :
 	- soit un Postgres local avec `npm run db:up`
-	- soit une base Neon dediee au dev avec son `DATABASE_URL`
-3. Remplacer les valeurs par vos vrais mots de passe locaux et votre `DATABASE_URL`.
+	- soit une base Neon dediee au dev avec sa `taia_bdd_DATABASE_URL`
+3. Remplacer les valeurs par vos vrais mots de passe locaux et votre `taia_bdd_DATABASE_URL`.
 4. Initialiser la base avec `npm run seed-postgres`.
 5. Lancer `npm run dev`.
 6. Generer un JWT de test avec `npm run admin-token` ou depuis la page admin.
@@ -58,7 +58,7 @@ Exemple de fichier `.env.local` :
 ```dotenv
 TAIA_ADMIN_EDITOR_PASSWORD=votre-mot-de-passe-editor
 TAIA_ADMIN_SUPER_PASSWORD=votre-mot-de-passe-admin-plus
-DATABASE_URL=postgresql://taia:taia@localhost:5432/taia
+taia_bdd_DATABASE_URL=postgresql://taia:taia@localhost:5432/taia
 ```
 
 Separation recommandee des bases :
@@ -69,9 +69,9 @@ Separation recommandee des bases :
 
 Concretement, cela signifie :
 
-- dans `.env.local`, garder la `DATABASE_URL` de developpement
-- dans Vercel `Production`, configurer la `DATABASE_URL` de production
-- dans Vercel `Preview`, configurer une `DATABASE_URL` differente si vous voulez tester les branches sans toucher la prod
+- dans `.env.local`, garder la `taia_bdd_DATABASE_URL` de developpement
+- dans Vercel `Production`, configurer la `taia_bdd_DATABASE_URL` de production
+- dans Vercel `Preview`, configurer une `taia_bdd_DATABASE_URL` differente si vous voulez tester les branches sans toucher la prod
 
 Regles importantes :
 
@@ -99,7 +99,7 @@ npm run dev
 
 Le projet fonctionne maintenant en mode hybride pour la persistance :
 
-- avec `DATABASE_URL`, les fichiers metier sont lus et ecrits dans Postgres
+- avec `taia_bdd_DATABASE_URL` ou `DATABASE_URL`, les fichiers metier sont lus et ecrits dans Postgres
 - avec `taia_READ_WRITE_TOKEN`, les photos et logos admin sont envoyes dans le dossier Blob public `medias/photos` ou `medias/logos`
 - sans `taia_READ_WRITE_TOKEN`, les medias restent en fallback local sur `BDD/photos` et `BDD/logos`
 
@@ -135,7 +135,7 @@ npm run seed-blob
 
 Pre-requis du seed Postgres :
 
-- `DATABASE_URL` ou `POSTGRES_URL` est disponible en local
+- `taia_bdd_DATABASE_URL`, `DATABASE_URL` ou `POSTGRES_URL` est disponible en local
 - la base cible est accessible
 
 Pre-requis du seed Blob :
@@ -274,12 +274,12 @@ npm run seed-postgres
 
 Pas a pas local recommande avec la configuration actuelle :
 
-1. Mettre la `DATABASE_URL` de dev dans `.env.local`.
+1. Mettre la `taia_bdd_DATABASE_URL` de dev dans `.env.local`.
 2. Lancer `npm run seed-postgres` pour charger `BDD/*.json` dans la base de dev.
 3. Lancer `npm run seed-blob` si tu veux aussi precharger le store media de dev.
 4. Lancer `npm run dev`.
 5. Ouvrir `http://localhost:8080/admin/` et tester les CRUD sur la base Postgres de dev.
-6. Conserver la `DATABASE_URL` de prod uniquement dans les variables Vercel `Production`.
+6. Conserver la `taia_bdd_DATABASE_URL` de prod uniquement dans les variables Vercel `Production`.
 
 Verification locale minimale des mots de passe :
 

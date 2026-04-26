@@ -27,7 +27,7 @@ Deployer le projet sur Vercel avec :
 5. Ajouter les deux variables suivantes :
    - `TAIA_ADMIN_EDITOR_PASSWORD`
    - `TAIA_ADMIN_SUPER_PASSWORD`
-   - `DATABASE_URL`
+   - `taia_bdd_DATABASE_URL`
    - `taia_READ_WRITE_TOKEN`
 6. Saisir vos vraies valeurs secretes pour chaque environnement cible.
 7. Relancer un deploiement apres ajout ou modification des variables.
@@ -36,8 +36,8 @@ Deployer le projet sur Vercel avec :
 
 Pour un premier deploiement propre :
 
-- definir `DATABASE_URL` de production pour `Production`
-- definir une `DATABASE_URL` differente pour `Preview` si vous voulez tester l'admin sur les branches ou pull requests
+- definir `taia_bdd_DATABASE_URL` de production pour `Production`
+- definir une `taia_bdd_DATABASE_URL` differente pour `Preview` si vous voulez tester l'admin sur les branches ou pull requests
 - definir les deux mots de passe admin au minimum pour `Production` et `Preview` selon votre besoin
 - ne jamais mettre les vraies valeurs dans le depot, Swagger, README ou les user stories
 
@@ -83,12 +83,12 @@ vercel env pull
 
 Le projet s'appuie maintenant sur :
 
-- une base Postgres distante pour les donnees metier, alimentee par `DATABASE_URL`
+- une base Postgres distante pour les donnees metier, alimentee par `taia_bdd_DATABASE_URL` en priorite, avec `DATABASE_URL` encore accepte comme alias
 - `taia-fichier` en public pour les medias, sous `medias/photos` et `medias/logos`
 
 Mode de fonctionnement :
 
-- sur Vercel avec `DATABASE_URL`, les CRUD metier lisent et ecrivent dans Postgres
+- sur Vercel avec `taia_bdd_DATABASE_URL` ou `DATABASE_URL`, les CRUD metier lisent et ecrivent dans Postgres
 - sur Vercel avec `taia_READ_WRITE_TOKEN`, les uploads admin publient les medias dans Blob public
 - les JSON versionnes de `BDD/` servent uniquement de source de seed pour Postgres
 
@@ -127,7 +127,7 @@ Le controle est fait a deux niveaux :
 2. `npm run dev` fonctionne sur `http://localhost:8080`
 3. `TAIA_ADMIN_EDITOR_PASSWORD` configure sur Vercel
 4. `TAIA_ADMIN_SUPER_PASSWORD` configure sur Vercel
-5. `DATABASE_URL` configure sur Vercel
+5. `taia_bdd_DATABASE_URL` configure sur Vercel
 6. `taia_READ_WRITE_TOKEN` configure sur Vercel
 7. deploy relance apres ajout des variables
 8. test de `/api/admin/token` effectue

@@ -2,7 +2,7 @@ import './load-local-env.mjs';
 import { closeDataStorage, isPostgresDataStorageEnabled, seedPostgresFromLocal } from '../lib/data-storage.mjs';
 
 if (!isPostgresDataStorageEnabled()) {
-  console.error('Aucune connexion Postgres configuree. Definissez DATABASE_URL ou POSTGRES_URL.');
+  console.error('Aucune connexion Postgres configuree. Definissez taia_bdd_DATABASE_URL, DATABASE_URL ou POSTGRES_URL.');
   process.exit(1);
 }
 
