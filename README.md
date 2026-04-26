@@ -78,6 +78,14 @@ export TAIA_ADMIN_SUPER_PASSWORD="votre-mot-de-passe-admin-plus"
 npm run dev
 ```
 
+Pour forcer le mode local sur `localhost` meme si les tokens Blob sont presents dans `.env.local` :
+
+```dotenv
+TAIA_STORAGE_MODE=local
+```
+
+Avec cette option, le projet lit et ecrit a nouveau dans `BDD/*.json`, `BDD/photos` et `BDD/logos` pendant le developpement local.
+
 ## Mode hybride local / Vercel Blob
 
 Le projet fonctionne maintenant en mode hybride pour la persistance :
@@ -85,6 +93,7 @@ Le projet fonctionne maintenant en mode hybride pour la persistance :
 - sans token Blob, les lectures et ecritures continuent d'utiliser `BDD/*.json` et `BDD/photos|logos`
 - avec `bdd_READ_WRITE_TOKEN`, les fichiers `Conference.json`, `Speakers.json`, `Salle.json` et `Entreprise.json` sont lus et ecrits dans le dossier Blob prive `Data/`
 - avec `taia_READ_WRITE_TOKEN`, les photos et logos admin sont envoyes dans le dossier Blob public `medias/photos` ou `medias/logos`
+- avec `TAIA_STORAGE_MODE=local`, le localhost force le fallback disque meme si les tokens Blob sont presents
 
 Pour recuperer les variables Vercel en local :
 
