@@ -4,6 +4,7 @@ const sessionTokenKey = 'taia-admin-token';
 const sessionDateKey = 'taia-admin-date';
 const sessionScopeKey = 'taia-admin-scope';
 const sessionPermissionsKey = 'taia-admin-permissions';
+const adminReloadDelayMs = 2000;
 
 const conferenceTypeOptions = [
   { value: 'session', label: 'Session' },
@@ -144,7 +145,8 @@ const state = {
     delete: {}
   },
   cardMessages: {},
-  expandedCards: {}
+  expandedCards: {},
+  reloadTimerId: null
 };
 
 function can(permission) {
@@ -749,10 +751,28 @@ async function ensureResourcesLoaded(forceReload = false) {
   await Promise.all(Object.keys(resourceConfigs).map((resourceType) => loadResource(resourceType)));
 }
 
-async function refreshWorkspace(message, tone = 'success') {
+function scheduleAdminReload() {
+  if (state.reloadTimerId) {
+    window.clearTimeout(state.reloadTimerId);
+  }
+
+  state.reloadTimerId = window.setTimeout(() => {
+    state.reloadTimerId = null;
+    window.location.reload();
+  }, adminReloadDelayMs);
+}
+
+async function refreshWorkspace(message, tone = 'success', scheduleReload = false) {
   await ensureResourcesLoaded(true);
   renderAdminWorkspace();
   updateAccessUi();
+
+  if (scheduleReload) {
+    setFeedback(`${message} Rechargement complet dans ${Math.round(adminReloadDelayMs / 1000)} s...`, tone);
+    scheduleAdminReload();
+    return;
+  }
+
   setFeedback(message, tone);
 }
 
@@ -796,7 +816,7 @@ function bindCard(container, resourceType, mode) {
         const result = await sendJsonRequest(endpoint, 'DELETE');
         setCardMessage(mode, resourceType, result.message || 'Suppression réussie.', 'success');
         state.selectedIds.delete[resourceType] = '';
-        await refreshWorkspace(`Suppression ${config.singularLabel} effectuée.`);
+        await refreshWorkspace(`Suppression ${config.singularLabel} effectuée.`, 'success', true);
       } catch (error) {
         updateCardFeedback(card, error.message, 'warning');
       }
@@ -886,7 +906,7 @@ function bindCard(container, resourceType, mode) {
         state.selectedIds.update[resourceType] = payload.id;
       }
 
-      await refreshWorkspace(`${modeDefinitions[mode].title} ${config.singularLabel} effectuée.`);
+      await refreshWorkspace(`${modeDefinitions[mode].title} ${config.singularLabel} effectuée.`, 'success', true);
     } catch (error) {
       updateCardFeedback(card, error.message, 'warning');
     }

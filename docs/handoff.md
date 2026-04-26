@@ -32,6 +32,8 @@
 - L'admin permet aussi un upload direct de photos et logos avec deux modes : Blob public sur Vercel si `taia_READ_WRITE_TOKEN` est present, ou fallback local avec copie dans `BDD/` et `dist/BDD/`
 - Les CRUD JSON basculent sur Blob prive `Data/` si `bdd_READ_WRITE_TOKEN` est present, sinon restent sur `BDD/*.json`
 - Les uploads admin sont limites a 2 Mo et controles aussi sur les dimensions : photo `1200 x 1600 px`, logo `1600 x 800 px`
+- Apres un create, update ou delete reussi dans l'admin, l'interface force un rechargement complet differe de `2 s` pour rendre visibles les ecritures Blob eventuellement retardees
+- La suppression d'un `speaker` ou d'une `entreprise` supprime aussi le media associe si l'URL ou le chemin pointe vers un media gere par TAIA
 
 ## Sources principales
 
@@ -65,6 +67,7 @@ npm run seed-blob
 - Les JSON de `BDD/` restent la source de seed et le fallback local, mais la persistance distante cible maintenant Vercel Blob avec `bdd_READ_WRITE_TOKEN`
 - Les ecritures API locales sont maintenant validees cote serveur avant persistance des fichiers JSON
 - Les uploads admin de photos et logos ecrivent en Blob public sur Vercel quand `taia_READ_WRITE_TOKEN` est present ; sinon ils restent copies localement pour le preview
+- Les suppressions admin de `speaker` et `entreprise` nettoient aussi les photos/logos associes quand ils sont stockes sous `BDD/` ou dans Blob `medias/`
 - Les variables de stockage attendues sont `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN`
 - Le programme source correspond a la JFTL du 9 juin 2026 au Beffroi de Montrouge, reconstruit depuis `docs/Programme-JFTL26.pdf` puis consolide avec la page officielle CFTL
 - Les liaisons conferences > speakers > salles sont a jour dans les trois fichiers JSON de `BDD/`

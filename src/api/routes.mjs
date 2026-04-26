@@ -234,7 +234,8 @@ const adminMediaResponseSchema = objectSchema(
       description: 'Indique si la ressource metier doit encore etre enregistree pour persister la nouvelle URL.',
       example: true
     },
-    message: stringProperty('Message de retour pour l’interface admin.', 'Image chargee. Enregistrez maintenant la ressource pour mettre a jour l URL.')
+    message: stringProperty('Message de retour pour l’interface admin.', 'Image chargee. Enregistrez maintenant la ressource pour mettre a jour l URL.'),
+    storage: stringProperty('Mode de stockage effectivement utilise pour l upload media.', 'vercel-blob')
   }
 );
 
@@ -426,7 +427,7 @@ export const apiRoutes = [
     method: 'DELETE',
     path: '/api/speaker',
     summary: 'Supprimer un speaker',
-    description: 'Supprime un speaker via son identifiant après authentification Bearer JWT admin-plus.',
+    description: 'Supprime un speaker via son identifiant après authentification Bearer JWT admin-plus. Si la photo du speaker est un media gere par TAIA, elle est aussi supprimee du stockage associe.',
     tags: ['Speaker'],
     requiresAuth: true,
     responseSchema: deleteSchema,
@@ -606,7 +607,7 @@ export const apiRoutes = [
     method: 'DELETE',
     path: '/api/entreprise',
     summary: 'Supprimer une entreprise',
-    description: 'Supprime une entreprise via son identifiant après authentification Bearer JWT admin-plus.',
+    description: 'Supprime une entreprise via son identifiant après authentification Bearer JWT admin-plus. Si le logo de l entreprise est un media gere par TAIA, il est aussi supprime du stockage associe.',
     tags: ['Entreprise'],
     requiresAuth: true,
     responseSchema: deleteSchema,
@@ -663,7 +664,7 @@ export const apiRoutes = [
     method: 'POST',
     path: '/api/admin/media',
     summary: 'Charger une image admin',
-    description: `Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a ${photoMaxDimensions}. Logos limites a ${logoMaxDimensions}. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif.`,
+    description: `Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a ${photoMaxDimensions}. Logos limites a ${logoMaxDimensions}. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif. L interface admin effectue ensuite un rechargement complet differe de 2 secondes apres un create, update ou delete reussi pour laisser la persistance se stabiliser.`,
     tags: ['Admin'],
     requiresAuth: true,
     requestBodySchema: adminMediaRequestSchema,

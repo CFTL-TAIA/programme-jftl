@@ -783,3 +783,44 @@ Validation effectuee :
 - `npm run build` reste OK
 ```
 
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
+j'ai aussi constaté sur l'admin, quand on rajoute / supprime / modifie un élément, la mise à jour n'est pas visible de suite. Peut on prévoir un rechargement de la page (mais pas trop rapide car ce mode de bdd est assez lent) pour que les modifications soient prisent en compte ? :)
+```
+
+### Reponse finale
+
+```text
+J'ai ajoute un rechargement complet differe dans l'admin, declenche uniquement apres un succes de creation, modification ou suppression.
+
+Le comportement est maintenant le suivant : l'interface fait d'abord son refresh habituel, puis programme un rechargement complet de la page quelques secondes plus tard pour laisser le temps au stockage Blob de se stabiliser avant de relire l'etat persistant.
+
+Validation faite : le build repasse et aucun probleme statique n'a ete remonte sur le code touche.
+```
+
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
+délai de 2s pour voir.
+A oui, je rajouterais un truc, quand on supprime une entreprise ou un speaker, il faudrait aussi supprimer les médias associés (logo / photos), c'est possible? :)
+```
+
+### Reponse finale
+
+```text
+Le delai de rechargement automatique de l'admin est passe a 2 s.
+
+J'ai aussi ajoute la suppression des medias associes lors de la suppression d'un speaker ou d'une entreprise, cote serveur. Concretement :
+- supprimer un speaker supprime aussi sa photo si c'est un media gere par l'application
+- supprimer une entreprise supprime aussi son logo si c'est un media gere par l'application
+
+La suppression reste volontairement limitee aux medias geres par TAIA. Si une URL externe a ete saisie manuellement, elle n'est pas supprimee.
+
+Validation faite : build OK et aucune erreur relevee sur les fichiers modifies.
+```
+

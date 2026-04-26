@@ -24,7 +24,7 @@ La solution mise en place ici est donc la suivante :
 
 Point de fiabilite : les requetes API sont maintenant reelles en local et sur Vercel, donc testables depuis Bruno, Postman, Karate ou Swagger sans mock navigateur.
 
-Point d'incertitude important a signaler : sur Vercel, une ecriture directe dans les fichiers JSON du depot ne sera pas persistante de maniere fiable entre les executions serverless. Les lectures sont adaptees, mais pour des ecritures durables il faudra ensuite passer par une vraie persistance distante comme Vercel KV, Postgres, Blob ou une autre base externe.
+Point de fiabilite a signaler : sur Vercel, les ecritures durables ne passent plus par le systeme de fichiers du runtime serverless. Le projet utilise maintenant Vercel Blob pour persister les JSON et les medias quand les tokens requis sont configures, avec un fallback local conserve pour le developpement.
 
 ## Configuration admin
 
@@ -112,6 +112,13 @@ Pre-requis du seed :
 - le store prive contient le dossier `Data`
 - le store public contient `medias/photos` et `medias/logos`
 - les variables `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN` sont disponibles en local
+
+Comportement admin recent a connaitre :
+
+- apres une creation, modification ou suppression reussie dans l'admin, la page se recharge automatiquement au bout de `2 s` pour laisser le temps a la persistance Blob de se stabiliser
+- la suppression d'un `speaker` supprime aussi sa photo si elle est geree par TAIA (`BDD/photos` ou Blob `medias/photos`)
+- la suppression d'une `entreprise` supprime aussi son logo s'il est gere par TAIA (`BDD/logos` ou Blob `medias/logos`)
+- les URLs externes saisies manuellement ne sont pas supprimees automatiquement
 
 ## Zone BDD
 

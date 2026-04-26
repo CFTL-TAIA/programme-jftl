@@ -1736,7 +1736,7 @@
       },
       "delete": {
         "summary": "Supprimer un speaker",
-        "description": "Supprime un speaker via son identifiant après authentification Bearer JWT admin-plus.",
+        "description": "Supprime un speaker via son identifiant après authentification Bearer JWT admin-plus. Si la photo du speaker est un media gere par TAIA, elle est aussi supprimee du stockage associe.",
         "tags": [
           "Speaker"
         ],
@@ -2811,7 +2811,7 @@
       },
       "delete": {
         "summary": "Supprimer une entreprise",
-        "description": "Supprime une entreprise via son identifiant après authentification Bearer JWT admin-plus.",
+        "description": "Supprime une entreprise via son identifiant après authentification Bearer JWT admin-plus. Si le logo de l entreprise est un media gere par TAIA, il est aussi supprime du stockage associe.",
         "tags": [
           "Entreprise"
         ],
@@ -3093,7 +3093,7 @@
     "/api/admin/media": {
       "post": {
         "summary": "Charger une image admin",
-        "description": "Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a 1200 x 1600 px. Logos limites a 1600 x 800 px. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif.",
+        "description": "Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a 1200 x 1600 px. Logos limites a 1600 x 800 px. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif. L interface admin effectue ensuite un rechargement complet differe de 2 secondes apres un create, update ou delete reussi pour laisser la persistance se stabiliser.",
         "tags": [
           "Admin"
         ],
@@ -3177,6 +3177,10 @@
                     "message": {
                       "type": "string",
                       "description": "Message de retour pour l’interface admin."
+                    },
+                    "storage": {
+                      "type": "string",
+                      "description": "Mode de stockage effectivement utilise pour l upload media."
                     }
                   }
                 },
