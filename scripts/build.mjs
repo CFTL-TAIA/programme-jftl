@@ -10,7 +10,6 @@ const rootDir = join(__dirname, '..');
 const distDir = join(rootDir, 'dist');
 const srcSiteDir = join(rootDir, 'src', 'site');
 const swaggerDocsDir = join(rootDir, 'docs', 'Swagger');
-const databaseDir = join(rootDir, 'BDD');
 
 function resetDist() {
   if (existsSync(distDir)) {
@@ -28,26 +27,6 @@ function copySite() {
   cpSync(srcSiteDir, distDir, { recursive: true });
 }
 
-function copyPublicPhotos() {
-  const photosSource = join(databaseDir, 'photos');
-  const photosTarget = join(distDir, 'BDD', 'photos');
-
-  mkdirSync(photosTarget, { recursive: true });
-  if (existsSync(photosSource)) {
-    cpSync(photosSource, photosTarget, { recursive: true });
-  }
-}
-
-function copyPublicLogos() {
-  const logosSource = join(databaseDir, 'logos');
-  const logosTarget = join(distDir, 'BDD', 'logos');
-
-  mkdirSync(logosTarget, { recursive: true });
-  if (existsSync(logosSource)) {
-    cpSync(logosSource, logosTarget, { recursive: true });
-  }
-}
-
 function copySwaggerUi() {
   const targetDir = join(distDir, 'docs', 'Swagger');
   mkdirSync(targetDir, { recursive: true });
@@ -62,8 +41,6 @@ async function writeGeneratedArtifacts() {
 
 resetDist();
 copySite();
-copyPublicPhotos();
-copyPublicLogos();
 copySwaggerUi();
 await writeGeneratedArtifacts();
 writeNoJekyll();

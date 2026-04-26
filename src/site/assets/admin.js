@@ -55,7 +55,7 @@ const resourceConfigs = {
         name: 'photo',
         label: 'Photo',
         type: 'text',
-        placeholder: '/BDD/photos/photo.jpg',
+        placeholder: '/assets/media/photos/photo.jpg',
         fullWidth: true,
         upload: {
           label: 'Charger une photo',
@@ -99,7 +99,7 @@ const resourceConfigs = {
         name: 'logo',
         label: 'Logo',
         type: 'text',
-        placeholder: '/BDD/logos/logo.png',
+        placeholder: '/assets/media/logos/logo.png',
         fullWidth: true,
         upload: {
           label: 'Charger un logo',

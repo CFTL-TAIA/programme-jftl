@@ -3,259 +3,259 @@
     "id": "spk-olivier-denoo",
     "nom": "Denoo",
     "prenom": "Olivier",
-    "photo": "/BDD/photos/olivier-denoo.jpg",
+    "photo": "/assets/media/photos/olivier-denoo.jpg",
     "entreprise": "ent-cftl"
   },
   {
     "id": "spk-gabriel-rousseau",
     "nom": "Rousseau",
     "prenom": "Gabriel",
-    "photo": "/BDD/photos/gabriel-rousseau.jpg",
+    "photo": "/assets/media/photos/gabriel-rousseau.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-karim-hedeoud-perrot",
     "nom": "Hedeoud-Perrot",
     "prenom": "Karim",
-    "photo": "/BDD/photos/karim-hedeoud-perrot.jpg",
+    "photo": "/assets/media/photos/karim-hedeoud-perrot.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-anthony-labarre",
     "nom": "Labarre",
     "prenom": "Anthony",
-    "photo": "/BDD/photos/anthony-labarre.jpg",
+    "photo": "/assets/media/photos/anthony-labarre.jpg",
     "entreprise": "ent-mgdis"
   },
   {
     "id": "spk-gilles-nouais",
     "nom": "Nouais",
     "prenom": "Gilles",
-    "photo": "/BDD/photos/gilles-nouais.jpg",
+    "photo": "/assets/media/photos/gilles-nouais.jpg",
     "entreprise": "ent-niji"
   },
   {
     "id": "spk-betty-beauge",
     "nom": "Beaugé",
     "prenom": "Betty",
-    "photo": "/BDD/photos/betty-beauge.jpg",
+    "photo": "/assets/media/photos/betty-beauge.jpg",
     "entreprise": "ent-niji"
   },
   {
     "id": "spk-bruno-legeard",
     "nom": "Legeard",
     "prenom": "Bruno",
-    "photo": "/BDD/photos/bruno-legeard.jpg",
+    "photo": "/assets/media/photos/bruno-legeard.jpg",
     "entreprise": "ent-smartesting"
   },
   {
     "id": "spk-frederic-assante-di-capillo",
     "nom": "Assante Di Capillo",
     "prenom": "Frédéric",
-    "photo": "/BDD/photos/frederic-assante-di-capillo.jpg",
+    "photo": "/assets/media/photos/frederic-assante-di-capillo.jpg",
     "entreprise": "ent-sii"
   },
   {
     "id": "spk-severine-cabocel",
     "nom": "Cabocel",
     "prenom": "Séverine",
-    "photo": "/BDD/photos/severine-cabocel.jpg",
+    "photo": "/assets/media/photos/severine-cabocel.jpg",
     "entreprise": "ent-france-travail"
   },
   {
     "id": "spk-michael-granier",
     "nom": "Granier",
     "prenom": "Michael",
-    "photo": "/BDD/photos/michael-granier.jpg",
+    "photo": "/assets/media/photos/michael-granier.jpg",
     "entreprise": "ent-no-code-testing"
   },
   {
     "id": "spk-julien-agoulon",
     "nom": "Agoulon",
     "prenom": "Julien",
-    "photo": "/BDD/photos/julien-agoulon.jpg",
+    "photo": "/assets/media/photos/julien-agoulon.jpg",
     "entreprise": "ent-open"
   },
   {
     "id": "spk-emmanuel-nocet",
     "nom": "Nocet",
     "prenom": "Emmanuel",
-    "photo": "/BDD/photos/emmanuel-nocet.jpg",
+    "photo": "/assets/media/photos/emmanuel-nocet.jpg",
     "entreprise": "ent-open"
   },
   {
     "id": "spk-jean-marc-pires",
     "nom": "Pires",
     "prenom": "Jean-Marc",
-    "photo": "/BDD/photos/jean-marc-pires.jpg",
+    "photo": "/assets/media/photos/jean-marc-pires.jpg",
     "entreprise": "ent-bnp-paribas-cardif"
   },
   {
     "id": "spk-pierre-yves-pamart",
     "nom": "Pamart",
     "prenom": "Pierre-Yves",
-    "photo": "/BDD/photos/pierre-yves-pamart.jpg",
+    "photo": "/assets/media/photos/pierre-yves-pamart.jpg",
     "entreprise": "ent-societe-generale"
   },
   {
     "id": "spk-jean-francois-fresi",
     "nom": "Fresi",
     "prenom": "Jean-François",
-    "photo": "/BDD/photos/jean-francois-fresi.png",
+    "photo": "/assets/media/photos/jean-francois-fresi.png",
     "entreprise": "ent-shift-op-solutions"
   },
   {
     "id": "spk-ramy-abid",
     "nom": "Abid",
     "prenom": "Ramy",
-    "photo": "/BDD/photos/ramy-abid.jpg",
+    "photo": "/assets/media/photos/ramy-abid.jpg",
     "entreprise": "ent-alpharho-solutions"
   },
   {
     "id": "spk-xavier-blanc",
     "nom": "Blanc",
     "prenom": "Xavier",
-    "photo": "/BDD/photos/xavier-blanc.jpg",
+    "photo": "/assets/media/photos/xavier-blanc.jpg",
     "entreprise": "ent-universite-bordeaux"
   },
   {
     "id": "spk-natia-sirbiladze",
     "nom": "Sirbiladze",
     "prenom": "Natia",
-    "photo": "/BDD/photos/natia-sirbiladze.jpg",
+    "photo": "/assets/media/photos/natia-sirbiladze.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-violaine-mansard-auduberteaud",
     "nom": "Mansard-Auduberteaud",
     "prenom": "Violaine",
-    "photo": "/BDD/photos/violaine-mansard-auduberteaud.jpg",
+    "photo": "/assets/media/photos/violaine-mansard-auduberteaud.jpg",
     "entreprise": "ent-applause"
   },
   {
     "id": "spk-alexandra-guimaraes-teixeira",
     "nom": "Guimaraes Teixeira",
     "prenom": "Alexandra",
-    "photo": "/BDD/photos/alexandra-guimaraes-teixeira.jpg",
+    "photo": "/assets/media/photos/alexandra-guimaraes-teixeira.jpg",
     "entreprise": "ent-applause"
   },
   {
     "id": "spk-nabil-idhammou",
     "nom": "Idhammou",
     "prenom": "Nabil",
-    "photo": "/BDD/photos/nabil-idhammou.jpg",
+    "photo": "/assets/media/photos/nabil-idhammou.jpg",
     "entreprise": "ent-groupe-one-point"
   },
   {
     "id": "spk-david-jedat",
     "nom": "Jedat",
     "prenom": "David",
-    "photo": "/BDD/photos/david-jedat.jpg",
+    "photo": "/assets/media/photos/david-jedat.jpg",
     "entreprise": "ent-groupe-one-point"
   },
   {
     "id": "spk-marius-ortega",
     "nom": "Ortega",
     "prenom": "Marius",
-    "photo": "/BDD/photos/marius-ortega.jpg",
+    "photo": "/assets/media/photos/marius-ortega.jpg",
     "entreprise": "ent-groupe-one-point"
   },
   {
     "id": "spk-francois-xavier-le-gal",
     "nom": "Le Gal",
     "prenom": "François-Xavier",
-    "photo": "/BDD/photos/francois-xavier-le-gal.jpg",
+    "photo": "/assets/media/photos/francois-xavier-le-gal.jpg",
     "entreprise": "ent-mr-suricate"
   },
   {
     "id": "spk-rodolphe-jacquemin",
     "nom": "Jacquemin",
     "prenom": "Rodolphe",
-    "photo": "/BDD/photos/rodolphe-jacquemin.jpg",
+    "photo": "/assets/media/photos/rodolphe-jacquemin.jpg",
     "entreprise": "ent-mr-suricate"
   },
   {
     "id": "spk-gil-burdallet",
     "nom": "Burdallet",
     "prenom": "Gil",
-    "photo": "/BDD/photos/gil-burdallet.jpg",
+    "photo": "/assets/media/photos/gil-burdallet.jpg",
     "entreprise": "ent-bnp-paribas-leasing-solutions"
   },
   {
     "id": "spk-remy-darras",
     "nom": "Darras",
     "prenom": "Rémy",
-    "photo": "/BDD/photos/remy-darras.jpg",
+    "photo": "/assets/media/photos/remy-darras.jpg",
     "entreprise": "ent-decathlon"
   },
   {
     "id": "spk-sabir-archkak",
     "nom": "Archkak",
     "prenom": "Sabir",
-    "photo": "/BDD/photos/sabir-archkak.jpg",
+    "photo": "/assets/media/photos/sabir-archkak.jpg",
     "entreprise": "ent-decathlon"
   },
   {
     "id": "spk-julien-cahu",
     "nom": "Cahu",
     "prenom": "Julien",
-    "photo": "/BDD/photos/julien-cahu.jpg",
+    "photo": "/assets/media/photos/julien-cahu.jpg",
     "entreprise": "ent-k-lagan"
   },
   {
     "id": "spk-sabeur-rahmouni",
     "nom": "Rahmouni",
     "prenom": "Sabeur",
-    "photo": "/BDD/photos/sabeur-rahmouni.jpg",
+    "photo": "/assets/media/photos/sabeur-rahmouni.jpg",
     "entreprise": "ent-k-lagan"
   },
   {
     "id": "spk-emmanuel-pene",
     "nom": "Pene",
     "prenom": "Emmanuel",
-    "photo": "/BDD/photos/emmanuel-pene.jpg",
+    "photo": "/assets/media/photos/emmanuel-pene.jpg",
     "entreprise": "ent-invarture"
   },
   {
     "id": "spk-melodie-chapelier",
     "nom": "Chapelier",
     "prenom": "Melodie",
-    "photo": "/BDD/photos/melodie-chapelier.jpg",
+    "photo": "/assets/media/photos/melodie-chapelier.jpg",
     "entreprise": "ent-invarture"
   },
   {
     "id": "spk-daphne-herve",
     "nom": "Hervé",
     "prenom": "Daphné",
-    "photo": "/BDD/photos/daphne-herve.jpg",
+    "photo": "/assets/media/photos/daphne-herve.jpg",
     "entreprise": "ent-rca"
   },
   {
     "id": "spk-fanny-velsin",
     "nom": "Velsin",
     "prenom": "Fanny",
-    "photo": "/BDD/photos/fanny-velsin.jpg",
+    "photo": "/assets/media/photos/fanny-velsin.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-florence-guerlais",
     "nom": "Guerlais",
     "prenom": "Florence",
-    "photo": "/BDD/photos/florence-guerlais.jpg",
+    "photo": "/assets/media/photos/florence-guerlais.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-nancaidah-toure-chauvin",
     "nom": "Toure Chauvin",
     "prenom": "Nancaïdah",
-    "photo": "/BDD/photos/nancaidah-toure-chauvin.jpg",
+    "photo": "/assets/media/photos/nancaidah-toure-chauvin.jpg",
     "entreprise": "ent-non-communique"
   },
   {
     "id": "spk-bernard-rulmont",
     "nom": "Rulmont",
     "prenom": "Bernard",
-    "photo": "/BDD/photos/bernard-rulmont.jpg",
+    "photo": "/assets/media/photos/bernard-rulmont.jpg",
     "entreprise": "ent-non-communique"
   }
 ]

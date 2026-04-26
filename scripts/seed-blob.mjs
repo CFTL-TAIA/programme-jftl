@@ -1,13 +1,9 @@
 import './load-local-env.mjs';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { put } from '@vercel/blob';
+import { siteMediaDir } from '../lib/project-paths.mjs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '..');
-const databaseDir = join(rootDir, 'BDD');
 const mediaToken = process.env.taia_READ_WRITE_TOKEN || process.env.TAIA_READ_WRITE_TOKEN;
 const supportedImageExtensions = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']);
 
@@ -18,7 +14,7 @@ function requireToken(value, name) {
 }
 
 async function uploadMediaDirectory(localDirName, blobDirName) {
-  const absoluteDir = join(databaseDir, localDirName);
+  const absoluteDir = join(siteMediaDir, localDirName);
 
   for (const fileName of readdirSync(absoluteDir)) {
     const absoluteFilePath = join(absoluteDir, fileName);

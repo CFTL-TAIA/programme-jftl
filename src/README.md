@@ -7,4 +7,4 @@ Ce dossier contient les sources techniques du projet :
 
 Le build Node.js transforme ces sources en un site statique publiable sur GitHub Pages.
 
-La zone BDD du projet est volontairement separee dans `BDD/` a la racine afin d'heberger les fichiers JSON contributifs et les photos JPG des speakers.
+Les seeds JSON vivent dans `src/api/data/` et les medias versionnes utilises en preview local vivent dans `src/site/assets/media/`.

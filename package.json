@@ -12,6 +12,7 @@
     "db:up": "docker compose -f docker-compose.postgres.yml up -d",
     "admin-token": "node ./scripts/print-admin-token.mjs",
     "build": "node ./scripts/build.mjs",
+    "migrate-media-urls": "node ./scripts/migrate-media-urls.mjs",
     "seed-postgres": "node ./scripts/seed-postgres.mjs",
     "clean": "node ./scripts/clean.mjs",
     "dev": "npm run build && npm run free-local-port && node ./scripts/preview.mjs",

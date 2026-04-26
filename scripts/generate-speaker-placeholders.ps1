@@ -1,8 +1,8 @@
 Add-Type -AssemblyName System.Drawing
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$speakersPath = Join-Path $projectRoot 'BDD\Speakers.json'
-$photosPath = Join-Path $projectRoot 'BDD\photos'
+$speakersPath = Join-Path $projectRoot 'src\api\data\Speakers.json'
+$photosPath = Join-Path $projectRoot 'src\site\assets\media\photos'
 
 if (!(Test-Path $photosPath)) {
   New-Item -ItemType Directory -Path $photosPath | Out-Null
@@ -11,7 +11,7 @@ if (!(Test-Path $photosPath)) {
 $speakers = Get-Content $speakersPath -Raw | ConvertFrom-Json
 
 foreach ($speaker in $speakers) {
-  $relativePhoto = $speaker.photo -replace '^/BDD/photos/', ''
+  $relativePhoto = $speaker.photo -replace '^/assets/media/photos/', ''
   $targetPath = Join-Path $photosPath $relativePhoto
   $directory = Split-Path -Parent $targetPath
 

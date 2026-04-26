@@ -376,7 +376,7 @@ export const apiRoutes = [
       id: 'spk-admin-demo',
       nom: 'Demo',
       prenom: 'Admin',
-      photo: '/BDD/photos/admin-demo.jpg',
+      photo: '/assets/media/photos/admin-demo.jpg',
       entreprise: 'ent-smartesting'
     },
     responseSchema: mutationSchema(speakerSchema, 'speaker cree avec succes.'),
@@ -385,7 +385,7 @@ export const apiRoutes = [
         id: 'spk-admin-demo',
         nom: 'Demo',
         prenom: 'Admin',
-        photo: '/BDD/photos/admin-demo.jpg',
+        photo: '/assets/media/photos/admin-demo.jpg',
         entreprise: 'ent-smartesting'
       },
       message: 'speaker cree avec succes.'
@@ -405,7 +405,7 @@ export const apiRoutes = [
       id: 'spk-bruno-legeard',
       nom: 'Legeard',
       prenom: 'Bruno',
-      photo: '/BDD/photos/bruno-legeard.jpg',
+      photo: '/assets/media/photos/bruno-legeard.jpg',
       entreprise: 'ent-smartesting'
     },
     responseSchema: mutationSchema(speakerSchema, 'speaker mis a jour avec succes.'),
@@ -414,7 +414,7 @@ export const apiRoutes = [
         id: 'spk-bruno-legeard',
         nom: 'Legeard',
         prenom: 'Bruno',
-        photo: '/BDD/photos/bruno-legeard.jpg',
+        photo: '/assets/media/photos/bruno-legeard.jpg',
         entreprise: 'ent-smartesting'
       },
       message: 'speaker mis a jour avec succes.'
@@ -559,7 +559,7 @@ export const apiRoutes = [
     requestBodyExample: {
       id: 'ent-admin-demo',
       nomEntreprise: 'Entreprise Admin',
-      logo: '/BDD/logos/entreprise-admin.png',
+      logo: '/assets/media/logos/entreprise-admin.png',
       siteUrl: 'https://example.test/'
     },
     responseSchema: mutationSchema(entrepriseSchema, 'entreprise cree avec succes.'),
@@ -567,7 +567,7 @@ export const apiRoutes = [
       item: {
         id: 'ent-admin-demo',
         nomEntreprise: 'Entreprise Admin',
-        logo: '/BDD/logos/entreprise-admin.png',
+        logo: '/assets/media/logos/entreprise-admin.png',
         siteUrl: 'https://example.test/'
       },
       message: 'entreprise cree avec succes.'
@@ -586,7 +586,7 @@ export const apiRoutes = [
     requestBodyExample: {
       id: 'ent-smartesting',
       nomEntreprise: 'Smartesting',
-      logo: '/BDD/logos/smartesting.png',
+      logo: '/assets/media/logos/smartesting.png',
       siteUrl: 'https://www.smartesting.com/'
     },
     responseSchema: mutationSchema(entrepriseSchema, 'entreprise mis a jour avec succes.'),
@@ -594,7 +594,7 @@ export const apiRoutes = [
       item: {
         id: 'ent-smartesting',
         nomEntreprise: 'Smartesting',
-        logo: '/BDD/logos/smartesting.png',
+        logo: '/assets/media/logos/smartesting.png',
         siteUrl: 'https://www.smartesting.com/'
       },
       message: 'entreprise mis a jour avec succes.'

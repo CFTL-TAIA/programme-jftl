@@ -2,181 +2,181 @@
   {
     "id": "ent-cftl",
     "nomEntreprise": "CFTL",
-    "logo": "/BDD/logos/cftl.svg",
+    "logo": "/assets/media/logos/cftl.svg",
     "siteUrl": "https://cftl.fr/"
   },
   {
     "id": "ent-non-communique",
     "nomEntreprise": "Non communique",
-    "logo": "/BDD/logos/non-communique.svg",
+    "logo": "/assets/media/logos/non-communique.svg",
     "siteUrl": "https://github.com/CFTL-TAIA/programme-jftl"
   },
   {
     "id": "ent-mgdis",
     "nomEntreprise": "MGDIS",
-    "logo": "/BDD/logos/mgdis.svg",
+    "logo": "/assets/media/logos/mgdis.svg",
     "siteUrl": "https://www.mgdis.fr/"
   },
   {
     "id": "ent-niji",
     "nomEntreprise": "Niji",
-    "logo": "/BDD/logos/niji.png",
+    "logo": "/assets/media/logos/niji.png",
     "siteUrl": "https://www.niji.fr/"
   },
   {
     "id": "ent-smartesting",
     "nomEntreprise": "Smartesting",
-    "logo": "/BDD/logos/smartesting.png",
+    "logo": "/assets/media/logos/smartesting.png",
     "siteUrl": "https://www.smartesting.com/"
   },
   {
     "id": "ent-sii",
     "nomEntreprise": "SII",
-    "logo": "/BDD/logos/sii.png",
+    "logo": "/assets/media/logos/sii.png",
     "siteUrl": "https://sii-group.com/fr-FR"
   },
   {
     "id": "ent-france-travail",
     "nomEntreprise": "France Travail",
-    "logo": "/BDD/logos/france-travail.png",
+    "logo": "/assets/media/logos/france-travail.png",
     "siteUrl": "https://www.francetravail.fr/"
   },
   {
     "id": "ent-no-code-testing",
     "nomEntreprise": "No Code Testing",
-    "logo": "/BDD/logos/no-code-testing.svg",
+    "logo": "/assets/media/logos/no-code-testing.svg",
     "siteUrl": "https://www.nocodetesting.com/"
   },
   {
     "id": "ent-open",
     "nomEntreprise": "Open",
-    "logo": "/BDD/logos/open.png",
+    "logo": "/assets/media/logos/open.png",
     "siteUrl": "https://www.open.global/"
   },
   {
     "id": "ent-bnp-paribas-cardif",
     "nomEntreprise": "BNP Paribas Cardif",
-    "logo": "/BDD/logos/bnp-paribas-cardif.svg",
+    "logo": "/assets/media/logos/bnp-paribas-cardif.svg",
     "siteUrl": "https://www.bnpparibascardif.com/"
   },
   {
     "id": "ent-societe-generale",
     "nomEntreprise": "Societe Generale",
-    "logo": "/BDD/logos/societe-generale.svg",
+    "logo": "/assets/media/logos/societe-generale.svg",
     "siteUrl": "https://www.societegenerale.com/"
   },
   {
     "id": "ent-shift-op-solutions",
     "nomEntreprise": "Shift Op Solutions",
-    "logo": "/BDD/logos/shift-op-solutions.png",
+    "logo": "/assets/media/logos/shift-op-solutions.png",
     "siteUrl": "https://www.shift-op.com/"
   },
   {
     "id": "ent-alpharho-solutions",
     "nomEntreprise": "Alpharho-solutions",
-    "logo": "/BDD/logos/alpharho-solutions.svg",
+    "logo": "/assets/media/logos/alpharho-solutions.svg",
     "siteUrl": "https://alpharho-solutions.com/"
   },
   {
     "id": "ent-universite-bordeaux",
     "nomEntreprise": "Universite de Bordeaux",
-    "logo": "/BDD/logos/universite-bordeaux.png",
+    "logo": "/assets/media/logos/universite-bordeaux.png",
     "siteUrl": "https://www.u-bordeaux.fr/"
   },
   {
     "id": "ent-applause",
     "nomEntreprise": "Applause",
-    "logo": "/BDD/logos/applause.svg",
+    "logo": "/assets/media/logos/applause.svg",
     "siteUrl": "https://www.applause.com/"
   },
   {
     "id": "ent-groupe-one-point",
     "nomEntreprise": "Groupe One Point",
-    "logo": "/BDD/logos/groupe-one-point.png",
+    "logo": "/assets/media/logos/groupe-one-point.png",
     "siteUrl": "https://www.groupeonepoint.com/fr/"
   },
   {
     "id": "ent-mr-suricate",
     "nomEntreprise": "Mr Suricate",
-    "logo": "/BDD/logos/mr-suricate.svg",
+    "logo": "/assets/media/logos/mr-suricate.svg",
     "siteUrl": "https://www.mrsuricate.com/"
   },
   {
     "id": "ent-bnp-paribas-leasing-solutions",
     "nomEntreprise": "BNP Paribas Leasing Solutions",
-    "logo": "/BDD/logos/bnp-paribas-leasing-solutions.svg",
+    "logo": "/assets/media/logos/bnp-paribas-leasing-solutions.svg",
     "siteUrl": "https://leasingsolutions.bnpparibas.com/fr"
   },
   {
     "id": "ent-decathlon",
     "nomEntreprise": "Decathlon",
-    "logo": "/BDD/logos/decathlon.png",
+    "logo": "/assets/media/logos/decathlon.png",
     "siteUrl": "https://www.decathlon.fr/"
   },
   {
     "id": "ent-k-lagan",
     "nomEntreprise": "K-LAGAN",
-    "logo": "/BDD/logos/k-lagan.png",
+    "logo": "/assets/media/logos/k-lagan.png",
     "siteUrl": "https://www.k-lagan.com/"
   },
   {
     "id": "ent-invarture",
     "nomEntreprise": "Invarture",
-    "logo": "/BDD/logos/invarture.svg",
+    "logo": "/assets/media/logos/invarture.svg",
     "siteUrl": "https://invarture.com/"
   },
   {
     "id": "ent-rca",
     "nomEntreprise": "RCA",
-    "logo": "/BDD/logos/rca.png",
+    "logo": "/assets/media/logos/rca.png",
     "siteUrl": "https://www.rca.fr/"
   },
   {
     "id": "ent-agilitest",
     "nomEntreprise": "Agilitest",
-    "logo": "/BDD/logos/agilitest.png",
+    "logo": "/assets/media/logos/agilitest.png",
     "siteUrl": "https://fr.agilitest.com/"
   },
   {
     "id": "ent-arcad-software",
     "nomEntreprise": "Arcad Software",
-    "logo": "/BDD/logos/arcad-software.png",
+    "logo": "/assets/media/logos/arcad-software.png",
     "siteUrl": "https://www.arcadsoftware.fr/dot/"
   },
   {
     "id": "ent-kalifast",
     "nomEntreprise": "Kalifast",
-    "logo": "/BDD/logos/kalifast.svg",
+    "logo": "/assets/media/logos/kalifast.svg",
     "siteUrl": "https://www.kalifast.com/"
   },
   {
     "id": "ent-athenco",
     "nomEntreprise": "Athenco",
-    "logo": "/BDD/logos/athenco.png",
+    "logo": "/assets/media/logos/athenco.png",
     "siteUrl": "https://athenco.com/"
   },
   {
     "id": "ent-opentext",
     "nomEntreprise": "OpenText",
-    "logo": "/BDD/logos/opentext.png",
+    "logo": "/assets/media/logos/opentext.png",
     "siteUrl": "https://www.opentext.com/products/devops-cloud"
   },
   {
     "id": "ent-unguess",
     "nomEntreprise": "Unguess",
-    "logo": "/BDD/logos/unguess.png",
+    "logo": "/assets/media/logos/unguess.png",
     "siteUrl": "https://www.unguess.io/"
   },
   {
     "id": "ent-uipath",
     "nomEntreprise": "UiPath",
-    "logo": "/BDD/logos/uipath.png",
+    "logo": "/assets/media/logos/uipath.png",
     "siteUrl": "https://www.uipath.com/"
   },
   {
     "id": "ent-digital-ai",
     "nomEntreprise": "Digital AI",
-    "logo": "/BDD/logos/digital-ai.png",
+    "logo": "/assets/media/logos/digital-ai.png",
     "siteUrl": "https://digital.ai/fr/"
   }
 ]

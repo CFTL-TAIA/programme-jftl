@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
-const entreprises = JSON.parse(readFileSync(join(rootDir, 'BDD', 'Entreprise.json'), 'utf8'));
-const logosDir = join(rootDir, 'BDD', 'logos');
+const entreprises = JSON.parse(readFileSync(join(rootDir, 'src', 'api', 'data', 'Entreprise.json'), 'utf8'));
+const logosDir = join(rootDir, 'src', 'site', 'assets', 'media', 'logos');
 
 mkdirSync(logosDir, { recursive: true });
 
@@ -20,7 +20,7 @@ function getInitials(name) {
 }
 
 for (const entreprise of entreprises) {
-  const fileName = entreprise.logo.replace('/BDD/logos/', '');
+  const fileName = entreprise.logo.replace('/assets/media/logos/', '');
   const filePath = join(logosDir, fileName);
   const initials = getInitials(entreprise.nomEntreprise) || 'E';
   const escapedName = entreprise.nomEntreprise

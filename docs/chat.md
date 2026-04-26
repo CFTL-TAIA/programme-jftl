@@ -1,5 +1,16 @@
 # Journal de session - Projet API TAIA
 
+## Regle de securite documentaire
+
+- Ce fichier ne doit jamais contenir de secret reel.
+- Toute URI Postgres, token Blob, mot de passe admin ou contenu de `.env.local` doit etre redige avant insertion ici.
+- Ce journal doit rester exploitable pour le suivi du projet, sans servir d'archive de secrets.
+
+## Note de lecture
+
+- Certaines mentions anciennes de `BDD/` plus bas dans ce journal decrivent un etat historique du projet.
+- L'architecture courante n'utilise plus ce dossier : les seeds vivent dans `src/api/data/` et les medias versionnes dans `src/site/assets/media/`.
+
 ## Demande initiale utilisateur
 
 ```text
@@ -871,11 +882,11 @@ J'ai aussi mis a jour la documentation projet habituelle : `README.md`, `docs/Ve
 ### Prompt utilisateur
 
 ```text
-voici la nouvelle branche et l'url de connexion générée : postgresql://neondb_owner:npg_aYxK8whmG7PN@ep-wandering-poetry-alnzh116-pooler.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+voici la nouvelle branche et l'url de connexion générée : [URI Postgres de dev redigee]
 J'ai modifié l'env.local
 
 - Peut on supprimer le code qui passait par les jsons pour éviter de garder de la dette technique? Je supprimerais ensuite le blob taia-bdd
-- J'ai crée taia-fichier-dev, qui me permettra, en local, d'envoyer les fichiers dans ce dossier afin de ne pas toucher à la production, donc je veux utiliser blob de dev pour mes tests : voici le token : vercel_blob_rw_y2YBXeYYkio65B8G_6ECBBDiQssWlUwpbWaf1vfPBGxS3r6
+- J'ai crée taia-fichier-dev, qui me permettra, en local, d'envoyer les fichiers dans ce dossier afin de ne pas toucher à la production, donc je veux utiliser blob de dev pour mes tests : voici le token : [token Blob de dev redige]
 Dès que tu as tout mis à jour, voici ce que je fais :
 - Je lance rapidement et test en local avec la bdd et le blob de test
 - je push mon code et je test en prod
