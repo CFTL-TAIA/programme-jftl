@@ -642,6 +642,28 @@ function getInputValue(form, fieldName) {
   return field && 'value' in field ? String(field.value || '') : '';
 }
 
+function buildUploadNameSource(form, resourceType, field, mode) {
+  const payload = normalizeFormPayload(resourceType, form);
+  const selectedItem = mode === 'update' ? getSelectedItem(resourceType, 'update') : null;
+  const livePayload = {
+    ...selectedItem,
+    ...payload
+  };
+
+  for (const candidateField of resourceConfigs[resourceType].fields) {
+    if (candidateField.type === 'multiselect') {
+      continue;
+    }
+
+    const liveValue = getInputValue(form, candidateField.name).trim();
+    if (liveValue) {
+      livePayload[candidateField.name] = liveValue;
+    }
+  }
+
+  return String(field.upload.nameSource(livePayload) || '').trim();
+}
+
 function setInputValue(form, fieldName, value) {
   const field = form.elements.namedItem(fieldName);
   if (field && 'value' in field) {
@@ -731,10 +753,9 @@ async function validateMediaFile(field, file) {
 }
 
 async function uploadMediaFile({ card, form, resourceType, mode, field, file }) {
-  const payload = normalizeFormPayload(resourceType, form);
   const selectedItem = mode === 'update' ? getSelectedItem(resourceType, 'update') : null;
   const currentPath = getInputValue(form, field.name) || selectedItem?.[field.name] || '';
-  const fileNameStem = field.upload.nameSource(payload).trim();
+  const fileNameStem = buildUploadNameSource(form, resourceType, field, mode);
 
   if (!currentPath && !fileNameStem) {
     throw new Error('Renseignez d’abord le nom associé avant de charger une image.');
