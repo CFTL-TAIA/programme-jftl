@@ -4,7 +4,7 @@ const sessionTokenKey = 'taia-admin-token';
 const sessionDateKey = 'taia-admin-date';
 const sessionScopeKey = 'taia-admin-scope';
 const sessionPermissionsKey = 'taia-admin-permissions';
-const adminReloadDelayMs = 2000;
+const adminReloadDelayMs = 5000;
 
 const conferenceTypeOptions = [
   { value: 'session', label: 'Session' },
@@ -146,7 +146,8 @@ const state = {
   },
   cardMessages: {},
   expandedCards: {},
-  reloadTimerId: null
+  reloadTimerId: null,
+  busyReason: ''
 };
 
 function can(permission) {
@@ -181,6 +182,20 @@ function setFeedback(message, tone = 'muted') {
   const node = document.getElementById('admin-auth-message');
   node.textContent = message;
   node.dataset.tone = tone;
+}
+
+function setBusyState(isBusy, message = 'Mise a jour en cours...') {
+  const overlay = document.getElementById('admin-busy-overlay');
+  const messageNode = document.getElementById('admin-busy-message');
+
+  if (!overlay || !messageNode) {
+    return;
+  }
+
+  overlay.hidden = !isBusy;
+  messageNode.textContent = message;
+  document.body.classList.toggle('is-busy', isBusy);
+  state.busyReason = isBusy ? message : '';
 }
 
 function updateTokenUi() {
@@ -227,6 +242,18 @@ function updateAccessUi() {
     if (section) {
       section.hidden = !can(definition.permission);
     }
+  }
+}
+
+function setActionBusy(card, isBusy) {
+  const controls = card.querySelectorAll('button, input, select, textarea');
+
+  for (const control of controls) {
+    if (control.id === 'admin-token-output') {
+      continue;
+    }
+
+    control.disabled = isBusy;
   }
 }
 
@@ -756,6 +783,8 @@ function scheduleAdminReload() {
     window.clearTimeout(state.reloadTimerId);
   }
 
+  setBusyState(true, `Modification enregistree. Rechargement complet dans ${Math.round(adminReloadDelayMs / 1000)} s...`);
+
   state.reloadTimerId = window.setTimeout(() => {
     state.reloadTimerId = null;
     window.location.reload();
@@ -799,7 +828,13 @@ function bindCard(container, resourceType, mode) {
   }
 
   if (mode === 'delete') {
+    let isDeleting = false;
+
     card.querySelector('[data-action="submit"]').addEventListener('click', async () => {
+      if (isDeleting) {
+        return;
+      }
+
       const item = getSelectedItem(resourceType, 'delete');
 
       if (!item) {
@@ -812,6 +847,8 @@ function bindCard(container, resourceType, mode) {
       }
 
       try {
+        isDeleting = true;
+        setActionBusy(card, true);
         const endpoint = `${config.endpoint}?id=${encodeURIComponent(item.id)}`;
         const result = await sendJsonRequest(endpoint, 'DELETE');
         setCardMessage(mode, resourceType, result.message || 'Suppression réussie.', 'success');
@@ -819,6 +856,11 @@ function bindCard(container, resourceType, mode) {
         await refreshWorkspace(`Suppression ${config.singularLabel} effectuée.`, 'success', true);
       } catch (error) {
         updateCardFeedback(card, error.message, 'warning');
+      } finally {
+        isDeleting = false;
+        if (!state.reloadTimerId) {
+          setActionBusy(card, false);
+        }
       }
     });
 
@@ -828,6 +870,8 @@ function bindCard(container, resourceType, mode) {
   const form = card.querySelector('[data-role="resource-form"]');
   const resetButton = card.querySelector('[data-action="reset"]');
   const mediaInputs = [...card.querySelectorAll('[data-role="media-upload"]')];
+  let isSubmitting = false;
+  let isUploadingMedia = false;
 
   resetButton?.addEventListener('click', () => {
     setCardExpanded(mode, resourceType, true);
@@ -838,6 +882,11 @@ function bindCard(container, resourceType, mode) {
 
   for (const mediaInput of mediaInputs) {
     mediaInput.addEventListener('change', async () => {
+      if (isUploadingMedia) {
+        mediaInput.value = '';
+        return;
+      }
+
       const file = mediaInput.files?.[0];
       if (!file || !form) {
         return;
@@ -849,12 +898,16 @@ function bindCard(container, resourceType, mode) {
       }
 
       try {
+        isUploadingMedia = true;
+        setActionBusy(card, true);
         await validateMediaFile(field, file);
         updateCardFeedback(card, 'Chargement de l’image en cours...');
         await uploadMediaFile({ card, form, resourceType, mode, field, file });
       } catch (error) {
         updateCardFeedback(card, error.message, 'warning');
       } finally {
+        isUploadingMedia = false;
+        setActionBusy(card, false);
         mediaInput.value = '';
       }
     });
@@ -872,6 +925,11 @@ function bindCard(container, resourceType, mode) {
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
     const payload = normalizeFormPayload(resourceType, form);
     const validationError = validatePayload(resourceType, payload);
 
@@ -899,6 +957,8 @@ function bindCard(container, resourceType, mode) {
     }
 
     try {
+      isSubmitting = true;
+      setActionBusy(card, true);
       const result = await sendJsonRequest(config.endpoint, mode === 'update' ? 'PUT' : 'POST', payload);
       setCardMessage(mode, resourceType, result.message || 'Opération réussie.', 'success');
 
@@ -909,6 +969,11 @@ function bindCard(container, resourceType, mode) {
       await refreshWorkspace(`${modeDefinitions[mode].title} ${config.singularLabel} effectuée.`, 'success', true);
     } catch (error) {
       updateCardFeedback(card, error.message, 'warning');
+    } finally {
+      isSubmitting = false;
+      if (!state.reloadTimerId) {
+        setActionBusy(card, false);
+      }
     }
   });
 }
@@ -937,6 +1002,7 @@ function persistSession() {
 }
 
 function clearSession() {
+  setBusyState(false);
   state.token = '';
   state.tokenDate = '';
   state.scope = '';
