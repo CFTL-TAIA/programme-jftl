@@ -871,6 +871,10 @@ code,
   backdrop-filter: blur(6px);
 }
 
+.admin-busy-overlay[hidden] {
+  display: none;
+}
+
 .admin-busy-card {
   display: grid;
   justify-items: center;
