@@ -824,3 +824,71 @@ La suppression reste volontairement limitee aux medias geres par TAIA. Si une UR
 Validation faite : build OK et aucune erreur relevee sur les fichiers modifies.
 ```
 
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
+la base est crée, go pour ma migration vers neon postgres : neon-database-taia
+Est ce que l'on peut garder le fonctionnement en local en json ou alors ce fonctionnement est complétement incompatible avec la base postgrès et risque de rendre les choses compliqués, et même de ne pas voir certains réel comportement?
+Si non, j'aimerais dans ce cas la qu'on ai aussi une base en local postgres pour pouvoir efficacement tester les modifications, est ce compliqué à installer?
+```
+
+### Reponse finale
+
+```text
+La migration du projet vers Postgres / Neon a ete preparee de bout en bout.
+
+Le projet utilise maintenant Postgres pour les donnees metier quand `DATABASE_URL` est configure, tout en gardant Blob pour les medias. Le fallback JSON local reste disponible pour du depannage, mais le mode recommande pour tester le vrai comportement est desormais une base Postgres de developpement, idealement differente de la base de production.
+
+Un Postgres local simple via Docker et un script de seed depuis `BDD/*.json` ont ete ajoutes pour faciliter les tests efficaces en local.
+```
+
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
+j'ai l'url, peux tu me faire le pas à pas pour mettre à jour les informations et charger correctement en local ?
+Peut on avoir une base de dev pour nos tests et une base de prod qui soit différente?
+N'oublie pas de mettre à jour les variables d'environnement local, supprimer finalement la bdd_READ_WRITE_TOKEN car je vais supprimer le blob associé.
+
+Pense à mettre à jour toute la documentation habituelle ;) (cf handoff.md, ou tu devrais indiquer que la documentation à mettre à jour est : chat.md avec les conversation partagés, readme.md pour la documentation utilisateur, handoff.md pour pouvoir communiquer entre llm ou différentes sessions, les US / cas de tests du projets pour toujours êtes à jour.)
+```
+
+### Reponse finale
+
+```text
+J'ai configure `.env.local` pour utiliser la `DATABASE_URL` Postgres de developpement, retire `bdd_READ_WRITE_TOKEN`, et supprime le mode `TAIA_STORAGE_MODE=local` pour que le projet charge bien la base de dev en local.
+
+Le split `dev` / `prod` est bien recommande : une base Neon de dev dans `.env.local`, une base prod differente dans Vercel `Production`, et si besoin une base ou branche `preview` supplementaire pour les previews.
+
+J'ai aussi mis a jour la documentation projet habituelle : `README.md`, `docs/Vercel.md`, `docs/handoff.md`, `docs/chat.md`, ainsi que les user stories et cas de test lies a la persistance Postgres.
+```
+
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
+voici la nouvelle branche et l'url de connexion générée : postgresql://neondb_owner:npg_aYxK8whmG7PN@ep-wandering-poetry-alnzh116-pooler.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+J'ai modifié l'env.local
+
+- Peut on supprimer le code qui passait par les jsons pour éviter de garder de la dette technique? Je supprimerais ensuite le blob taia-bdd
+- J'ai crée taia-fichier-dev, qui me permettra, en local, d'envoyer les fichiers dans ce dossier afin de ne pas toucher à la production, donc je veux utiliser blob de dev pour mes tests : voici le token : vercel_blob_rw_y2YBXeYYkio65B8G_6ECBBDiQssWlUwpbWaf1vfPBGxS3r6
+Dès que tu as tout mis à jour, voici ce que je fais :
+- Je lance rapidement et test en local avec la bdd et le blob de test
+- je push mon code et je test en prod
+- je savoure un café heureux que tout fonctionne bien :P
+```
+
+### Reponse finale
+
+```text
+Le fallback runtime JSON a ete retire pour les donnees metier afin de limiter la dette technique. Les JSON versionnes dans `BDD/` restent uniquement une source de seed pour Postgres.
+
+Le token local `taia_READ_WRITE_TOKEN` pointe maintenant vers le store Blob de developpement afin de tester les uploads media sans toucher a la production. Le script `npm run seed-blob` ne pousse plus que les medias.
+
+La documentation projet habituelle a ete alignee sur cette architecture : Postgres obligatoire pour les donnees metier, Blob reserve aux medias, JSON reserves au seed.
+```
+

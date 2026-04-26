@@ -208,63 +208,63 @@
                       "id": "conf-ouverture-olivier-denoo",
                       "nom": "Ouverture par Olivier Denoo",
                       "horaire": "2026-06-09T09:00:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-olivier-denoo"
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
                       "id": "conf-keynote-1-gouvernance-antifragile",
                       "nom": "Keynote #1 : Vers une gouvernance antifragile: décider à l'ère des collectifs humain agent",
                       "horaire": "2026-06-09T09:20:00+02:00",
+                      "type": "keynote",
                       "speakerIds": [
                         "spk-gabriel-rousseau",
                         "spk-karim-hedeoud-perrot"
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "keynote"
+                      ]
                     },
                     {
                       "id": "conf-20-minutes-open",
                       "nom": "20 minutes pour convaincre OPEN",
                       "horaire": "2026-06-09T09:50:00+02:00",
+                      "type": "sponsor",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "sponsor"
+                      ]
                     },
                     {
                       "id": "conf-visite-stands-collation-matin",
                       "nom": "Visite des stands & collation",
                       "horaire": "2026-06-09T10:10:00+02:00",
+                      "type": "networking",
                       "speakerIds": [],
-                      "salleIds": [],
-                      "type": "networking"
+                      "salleIds": []
                     },
                     {
-                      "id": "conf-ia-generative-tests-augmentes",
-                      "nom": "De l’IA générative aux tests “augmentés” : Les 7 leçons apprises pour industrialiser l’IA dans le cycle de test",
+                      "id": "conf-arreter-vanity-metrics",
+                      "nom": "Arrêter les vanity metrics",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "session",
                       "speakerIds": [
-                        "spk-anthony-labarre",
-                        "spk-gilles-nouais",
-                        "spk-betty-beauge"
+                        "spk-jean-francois-fresi",
+                        "spk-ramy-abid"
                       ],
                       "salleIds": [
-                        "sal-auditorium-moebius"
-                      ],
-                      "type": "session"
+                        "sal-2-2"
+                      ]
                     },
                     {
                       "id": "conf-automatisation-tests-tribunal",
                       "nom": "L'automatisation des tests au tribunal",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-frederic-assante-di-capillo",
                         "spk-severine-cabocel",
@@ -272,249 +272,250 @@
                       ],
                       "salleIds": [
                         "sal-auditorium-blin"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
                       "id": "conf-aventuriers-bdd-part-1",
                       "nom": "Les aventuriers du BDD: déployer le BDD dans 75 squads – part 1",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-jean-marc-pires"
                       ],
                       "salleIds": [
                         "sal-grand-salon"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-arreter-vanity-metrics",
-                      "nom": "Arrêter les vanity metrics",
-                      "horaire": "2026-06-09T10:40:00+02:00",
-                      "speakerIds": [
-                        "spk-jean-francois-fresi",
-                        "spk-ramy-abid"
-                      ],
-                      "salleIds": [
-                        "sal-2-2"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
                       "id": "conf-demo-agilitest",
                       "nom": "Démonstration éditeur AGILITEST",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "demo",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-2-4"
-                      ],
-                      "type": "demo"
+                      ]
                     },
                     {
                       "id": "conf-demo-arcad-software",
                       "nom": "Démonstration éditeur ARCAD SOFTWARE",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "demo",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-2-5"
-                      ],
-                      "type": "demo"
+                      ]
                     },
                     {
                       "id": "conf-demo-kalifast",
                       "nom": "Démonstration éditeur KALIFAST",
                       "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "demo",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-2-6"
-                      ],
-                      "type": "demo"
+                      ]
                     },
                     {
-                      "id": "conf-tester-les-agents-ia",
-                      "nom": "Tester les agents IA – Défis, techniques et retour d'expériences",
-                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "id": "conf-ia-generative-tests-augmentes",
+                      "nom": "De l’IA générative aux tests “augmentés” : Les 7 leçons apprises pour industrialiser l’IA dans le cycle de test",
+                      "horaire": "2026-06-09T10:40:00+02:00",
+                      "type": "session",
                       "speakerIds": [
-                        "spk-bruno-legeard"
+                        "spk-anthony-labarre",
+                        "spk-gilles-nouais",
+                        "spk-betty-beauge"
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
+                      ]
+                    },
+                    {
+                      "id": "conf-demo-athenco",
+                      "nom": "Démonstration éditeur ATHENCO",
+                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "demo",
+                      "speakerIds": [],
+                      "salleIds": [
+                        "sal-2-4"
+                      ]
+                    },
+                    {
+                      "id": "conf-demo-opentext",
+                      "nom": "Démonstration éditeur OPENTEXT",
+                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "demo",
+                      "speakerIds": [],
+                      "salleIds": [
+                        "sal-2-5"
+                      ]
+                    },
+                    {
+                      "id": "conf-demo-unguess",
+                      "nom": "Démonstration éditeur UNGUESS",
+                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "demo",
+                      "speakerIds": [],
+                      "salleIds": [
+                        "sal-2-6"
+                      ]
+                    },
+                    {
+                      "id": "conf-developpeur-infiltre-testeurs",
+                      "nom": "Un développeur infiltré chez les testeurs : Comment faire échouer le BDD, l'ATDD & le TDD surtout à l'ère du Spec Driven Development",
+                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-pierre-yves-pamart"
                       ],
-                      "type": "session"
+                      "salleIds": [
+                        "sal-grand-salon"
+                      ]
+                    },
+                    {
+                      "id": "conf-rag-na-rock",
+                      "nom": "RAG NA ROCK",
+                      "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-xavier-blanc"
+                      ],
+                      "salleIds": [
+                        "sal-2-2"
+                      ]
                     },
                     {
                       "id": "conf-robot-hybride",
                       "nom": "Robot hybride pour mission critique : sécuriser le budget avec l’automatisation et des tests intelligents",
                       "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-julien-agoulon",
                         "spk-emmanuel-nocet"
                       ],
                       "salleIds": [
                         "sal-auditorium-blin"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
-                      "id": "conf-developpeur-infiltre-testeurs",
-                      "nom": "Un développeur infiltré chez les testeurs : Comment faire échouer le BDD, l'ATDD & le TDD surtout à l'ère du Spec Driven Development",
+                      "id": "conf-tester-les-agents-ia",
+                      "nom": "Tester les agents IA – Défis, techniques et retour d'expériences",
                       "horaire": "2026-06-09T11:30:00+02:00",
+                      "type": "session",
                       "speakerIds": [
-                        "spk-pierre-yves-pamart"
+                        "spk-bruno-legeard"
                       ],
                       "salleIds": [
-                        "sal-grand-salon"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-rag-na-rock",
-                      "nom": "RAG NA ROCK",
-                      "horaire": "2026-06-09T11:30:00+02:00",
-                      "speakerIds": [
-                        "spk-xavier-blanc"
-                      ],
-                      "salleIds": [
-                        "sal-2-2"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-demo-athenco",
-                      "nom": "Démonstration éditeur ATHENCO",
-                      "horaire": "2026-06-09T11:30:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-4"
-                      ],
-                      "type": "demo"
-                    },
-                    {
-                      "id": "conf-demo-opentext",
-                      "nom": "Démonstration éditeur OPENTEXT",
-                      "horaire": "2026-06-09T11:30:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-5"
-                      ],
-                      "type": "demo"
-                    },
-                    {
-                      "id": "conf-demo-unguess",
-                      "nom": "Démonstration éditeur UNGUESS",
-                      "horaire": "2026-06-09T11:30:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-6"
-                      ],
-                      "type": "demo"
+                        "sal-auditorium-moebius"
+                      ]
                     },
                     {
                       "id": "conf-cocktail-dejeuner-visite-stands",
                       "nom": "Cocktail déjeuner & visite des stands",
                       "horaire": "2026-06-09T12:10:00+02:00",
+                      "type": "networking",
                       "speakerIds": [],
-                      "salleIds": [],
-                      "type": "networking"
+                      "salleIds": []
                     },
                     {
                       "id": "conf-keynote-2-women-lead-tech",
                       "nom": "Keynote #2 : When Women Lead Tech: From Entry Level to Executive Management",
                       "horaire": "2026-06-09T13:30:00+02:00",
+                      "type": "keynote",
                       "speakerIds": [
                         "spk-natia-sirbiladze"
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "keynote"
+                      ]
                     },
                     {
                       "id": "conf-20-minutes-mr-suricate",
                       "nom": "20 minutes pour convaincre MR SURICATE",
                       "horaire": "2026-06-09T14:00:00+02:00",
+                      "type": "sponsor",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "sponsor"
-                    },
-                    {
-                      "id": "conf-redefinir-qualite-ia-red-teaming",
-                      "nom": "Redéfinir la qualité de l'IA grâce aux tests contradictoires et au red teaming",
-                      "horaire": "2026-06-09T14:30:00+02:00",
-                      "speakerIds": [
-                        "spk-violaine-mansard-auduberteaud",
-                        "spk-alexandra-guimaraes-teixeira"
-                      ],
-                      "salleIds": [
-                        "sal-auditorium-moebius"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
                       "id": "conf-auto-maintenance-tests",
                       "nom": "En route vers l'Auto-Maintenance des tests",
                       "horaire": "2026-06-09T14:30:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-francois-xavier-le-gal",
                         "spk-rodolphe-jacquemin"
                       ],
                       "salleIds": [
                         "sal-auditorium-blin"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
-                      "id": "conf-qualite-sans-compromis",
-                      "nom": "Qualité sans compromis, l'approche data-driven en environnement agile",
+                      "id": "conf-demo-mr-suricate",
+                      "nom": "Démonstration éditeur MR SURICATE",
                       "horaire": "2026-06-09T14:30:00+02:00",
-                      "speakerIds": [
-                        "spk-remy-darras",
-                        "spk-sabir-archkak"
-                      ],
+                      "type": "demo",
+                      "speakerIds": [],
                       "salleIds": [
-                        "sal-grand-salon"
-                      ],
-                      "type": "session"
+                        "sal-2-5"
+                      ]
+                    },
+                    {
+                      "id": "conf-demo-uipath",
+                      "nom": "Démonstration éditeur UIPATH",
+                      "horaire": "2026-06-09T14:30:00+02:00",
+                      "type": "demo",
+                      "speakerIds": [],
+                      "salleIds": [
+                        "sal-2-6"
+                      ]
                     },
                     {
                       "id": "conf-migration-sap-s4hana",
                       "nom": "Migration SAP vers S/4 HANA : comment la QA peut devenir un acteur central du succès des projets SAP",
                       "horaire": "2026-06-09T14:30:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-emmanuel-pene",
                         "spk-melodie-chapelier"
                       ],
                       "salleIds": [
                         "sal-2-2"
-                      ],
-                      "type": "session"
+                      ]
                     },
                     {
-                      "id": "conf-demo-mr-suricate",
-                      "nom": "Démonstration éditeur MR SURICATE",
+                      "id": "conf-qualite-sans-compromis",
+                      "nom": "Qualité sans compromis, l'approche data-driven en environnement agile",
                       "horaire": "2026-06-09T14:30:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-5"
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-remy-darras",
+                        "spk-sabir-archkak"
                       ],
-                      "type": "demo"
+                      "salleIds": [
+                        "sal-grand-salon"
+                      ]
                     },
                     {
-                      "id": "conf-demo-uipath",
-                      "nom": "Démonstration éditeur UIPATH",
+                      "id": "conf-redefinir-qualite-ia-red-teaming",
+                      "nom": "Redéfinir la qualité de l'IA grâce aux tests contradictoires et au red teaming",
                       "horaire": "2026-06-09T14:30:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-6"
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-violaine-mansard-auduberteaud",
+                        "spk-alexandra-guimaraes-teixeira"
                       ],
-                      "type": "demo"
+                      "salleIds": [
+                        "sal-auditorium-moebius"
+                      ]
                     },
                     {
                       "id": "conf-table-ronde-rayonner-qualite",
                       "nom": "Parler du test pour faire rayonner la qualité",
                       "horaire": "2026-06-09T14:30:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-fanny-velsin",
                         "spk-florence-guerlais",
@@ -522,13 +523,60 @@
                       ],
                       "salleIds": [
                         "sal-2-4"
+                      ]
+                    },
+                    {
+                      "id": "conf-7-principes-qualite-agile",
+                      "nom": "Des 7 principes du test aux 7 principes de la qualité (en agile) ?",
+                      "horaire": "2026-06-09T15:20:00+02:00",
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-julien-cahu",
+                        "spk-sabeur-rahmouni"
                       ],
-                      "type": "session"
+                      "salleIds": [
+                        "sal-grand-salon"
+                      ]
+                    },
+                    {
+                      "id": "conf-agilite-echelle-tmmi",
+                      "nom": "Agilité à l'échelle et TMMI : quelle valeur ajoutée de l'IA ?",
+                      "horaire": "2026-06-09T15:20:00+02:00",
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-gil-burdallet"
+                      ],
+                      "salleIds": [
+                        "sal-auditorium-blin"
+                      ]
+                    },
+                    {
+                      "id": "conf-demo-smartesting",
+                      "nom": "Démonstration éditeur SMARTESTING",
+                      "horaire": "2026-06-09T15:20:00+02:00",
+                      "type": "demo",
+                      "speakerIds": [],
+                      "salleIds": [
+                        "sal-2-5"
+                      ]
+                    },
+                    {
+                      "id": "conf-engagement-communautaire-qualite",
+                      "nom": "Engagez-vous qu'ils disaient ! Comment l'engagement communautaire peut vous faire progresser techniquement et humainement.",
+                      "horaire": "2026-06-09T15:20:00+02:00",
+                      "type": "session",
+                      "speakerIds": [
+                        "spk-daphne-herve"
+                      ],
+                      "salleIds": [
+                        "sal-2-2"
+                      ]
                     },
                     {
                       "id": "conf-permis-conduire-ia",
                       "nom": "Permis de conduire IA : mieux piloter, éviter les amendes et rouler tout en confiance.",
                       "horaire": "2026-06-09T15:20:00+02:00",
+                      "type": "session",
                       "speakerIds": [
                         "spk-nabil-idhammou",
                         "spk-david-jedat",
@@ -536,95 +584,47 @@
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-agilite-echelle-tmmi",
-                      "nom": "Agilité à l'échelle et TMMI : quelle valeur ajoutée de l'IA ?",
-                      "horaire": "2026-06-09T15:20:00+02:00",
-                      "speakerIds": [
-                        "spk-gil-burdallet"
-                      ],
-                      "salleIds": [
-                        "sal-auditorium-blin"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-7-principes-qualite-agile",
-                      "nom": "Des 7 principes du test aux 7 principes de la qualité (en agile) ?",
-                      "horaire": "2026-06-09T15:20:00+02:00",
-                      "speakerIds": [
-                        "spk-julien-cahu",
-                        "spk-sabeur-rahmouni"
-                      ],
-                      "salleIds": [
-                        "sal-grand-salon"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-engagement-communautaire-qualite",
-                      "nom": "Engagez-vous qu'ils disaient ! Comment l'engagement communautaire peut vous faire progresser techniquement et humainement.",
-                      "horaire": "2026-06-09T15:20:00+02:00",
-                      "speakerIds": [
-                        "spk-daphne-herve"
-                      ],
-                      "salleIds": [
-                        "sal-2-2"
-                      ],
-                      "type": "session"
-                    },
-                    {
-                      "id": "conf-demo-smartesting",
-                      "nom": "Démonstration éditeur SMARTESTING",
-                      "horaire": "2026-06-09T15:20:00+02:00",
-                      "speakerIds": [],
-                      "salleIds": [
-                        "sal-2-5"
-                      ],
-                      "type": "demo"
+                      ]
                     },
                     {
                       "id": "conf-20-minutes-digital-ai",
                       "nom": "20 minutes pour convaincre DIGITAL AI",
                       "horaire": "2026-06-09T16:10:00+02:00",
+                      "type": "sponsor",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "sponsor"
+                      ]
                     },
                     {
                       "id": "conf-visite-stands-collation-apresmidi",
                       "nom": "Visite des stands & collation",
                       "horaire": "2026-06-09T16:30:00+02:00",
+                      "type": "networking",
                       "speakerIds": [],
-                      "salleIds": [],
-                      "type": "networking"
+                      "salleIds": []
                     },
                     {
                       "id": "conf-keynote-3-bonheur-sinon-rien",
                       "nom": "Keynote #3 : Le bonheur sinon rien !",
                       "horaire": "2026-06-09T17:00:00+02:00",
+                      "type": "keynote",
                       "speakerIds": [
                         "spk-bernard-rulmont"
                       ],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "keynote"
+                      ]
                     },
                     {
                       "id": "conf-remise-prix-cloture",
                       "nom": "Remise des prix & Clôture de la journée",
                       "horaire": "2026-06-09T17:30:00+02:00",
+                      "type": "closing",
                       "speakerIds": [],
                       "salleIds": [
                         "sal-auditorium-moebius"
-                      ],
-                      "type": "closing"
+                      ]
                     }
                   ],
                   "total": 37,
@@ -1206,74 +1206,11 @@
                 "example": {
                   "items": [
                     {
-                      "id": "spk-olivier-denoo",
-                      "nom": "Denoo",
-                      "prenom": "Olivier",
-                      "photo": "/BDD/photos/olivier-denoo.jpg",
-                      "entreprise": "ent-cftl"
-                    },
-                    {
-                      "id": "spk-gabriel-rousseau",
-                      "nom": "Rousseau",
-                      "prenom": "Gabriel",
-                      "photo": "/BDD/photos/gabriel-rousseau.jpg",
-                      "entreprise": "ent-non-communique"
-                    },
-                    {
-                      "id": "spk-karim-hedeoud-perrot",
-                      "nom": "Hedeoud-Perrot",
-                      "prenom": "Karim",
-                      "photo": "/BDD/photos/karim-hedeoud-perrot.jpg",
-                      "entreprise": "ent-non-communique"
-                    },
-                    {
-                      "id": "spk-anthony-labarre",
-                      "nom": "Labarre",
-                      "prenom": "Anthony",
-                      "photo": "/BDD/photos/anthony-labarre.jpg",
-                      "entreprise": "ent-mgdis"
-                    },
-                    {
-                      "id": "spk-gilles-nouais",
-                      "nom": "Nouais",
-                      "prenom": "Gilles",
-                      "photo": "/BDD/photos/gilles-nouais.jpg",
-                      "entreprise": "ent-niji"
-                    },
-                    {
-                      "id": "spk-betty-beauge",
-                      "nom": "Beaugé",
-                      "prenom": "Betty",
-                      "photo": "/BDD/photos/betty-beauge.jpg",
-                      "entreprise": "ent-niji"
-                    },
-                    {
-                      "id": "spk-bruno-legeard",
-                      "nom": "Legeard",
-                      "prenom": "Bruno",
-                      "photo": "/BDD/photos/bruno-legeard.jpg",
-                      "entreprise": "ent-smartesting"
-                    },
-                    {
-                      "id": "spk-frederic-assante-di-capillo",
-                      "nom": "Assante Di Capillo",
-                      "prenom": "Frédéric",
-                      "photo": "/BDD/photos/frederic-assante-di-capillo.jpg",
-                      "entreprise": "ent-sii"
-                    },
-                    {
-                      "id": "spk-severine-cabocel",
-                      "nom": "Cabocel",
-                      "prenom": "Séverine",
-                      "photo": "/BDD/photos/severine-cabocel.jpg",
-                      "entreprise": "ent-france-travail"
-                    },
-                    {
-                      "id": "spk-michael-granier",
-                      "nom": "Granier",
-                      "prenom": "Michael",
-                      "photo": "/BDD/photos/michael-granier.jpg",
-                      "entreprise": "ent-no-code-testing"
+                      "id": "spk-ramy-abid",
+                      "nom": "Abid",
+                      "prenom": "Ramy",
+                      "photo": "/BDD/photos/ramy-abid.jpg",
+                      "entreprise": "ent-alpharho-solutions"
                     },
                     {
                       "id": "spk-julien-agoulon",
@@ -1283,39 +1220,25 @@
                       "entreprise": "ent-open"
                     },
                     {
-                      "id": "spk-emmanuel-nocet",
-                      "nom": "Nocet",
-                      "prenom": "Emmanuel",
-                      "photo": "/BDD/photos/emmanuel-nocet.jpg",
-                      "entreprise": "ent-open"
+                      "id": "spk-sabir-archkak",
+                      "nom": "Archkak",
+                      "prenom": "Sabir",
+                      "photo": "/BDD/photos/sabir-archkak.jpg",
+                      "entreprise": "ent-decathlon"
                     },
                     {
-                      "id": "spk-jean-marc-pires",
-                      "nom": "Pires",
-                      "prenom": "Jean-Marc",
-                      "photo": "/BDD/photos/jean-marc-pires.jpg",
-                      "entreprise": "ent-bnp-paribas-cardif"
+                      "id": "spk-frederic-assante-di-capillo",
+                      "nom": "Assante Di Capillo",
+                      "prenom": "Frédéric",
+                      "photo": "/BDD/photos/frederic-assante-di-capillo.jpg",
+                      "entreprise": "ent-sii"
                     },
                     {
-                      "id": "spk-pierre-yves-pamart",
-                      "nom": "Pamart",
-                      "prenom": "Pierre-Yves",
-                      "photo": "/BDD/photos/pierre-yves-pamart.jpg",
-                      "entreprise": "ent-societe-generale"
-                    },
-                    {
-                      "id": "spk-jean-francois-fresi",
-                      "nom": "Fresi",
-                      "prenom": "Jean-François",
-                      "photo": "/BDD/photos/jean-francois-fresi.png",
-                      "entreprise": "ent-shift-op-solutions"
-                    },
-                    {
-                      "id": "spk-ramy-abid",
-                      "nom": "Abid",
-                      "prenom": "Ramy",
-                      "photo": "/BDD/photos/ramy-abid.jpg",
-                      "entreprise": "ent-alpharho-solutions"
+                      "id": "spk-betty-beauge",
+                      "nom": "Beaugé",
+                      "prenom": "Betty",
+                      "photo": "/BDD/photos/betty-beauge.jpg",
+                      "entreprise": "ent-niji"
                     },
                     {
                       "id": "spk-xavier-blanc",
@@ -1325,62 +1248,6 @@
                       "entreprise": "ent-universite-bordeaux"
                     },
                     {
-                      "id": "spk-natia-sirbiladze",
-                      "nom": "Sirbiladze",
-                      "prenom": "Natia",
-                      "photo": "/BDD/photos/natia-sirbiladze.jpg",
-                      "entreprise": "ent-non-communique"
-                    },
-                    {
-                      "id": "spk-violaine-mansard-auduberteaud",
-                      "nom": "Mansard-Auduberteaud",
-                      "prenom": "Violaine",
-                      "photo": "/BDD/photos/violaine-mansard-auduberteaud.jpg",
-                      "entreprise": "ent-applause"
-                    },
-                    {
-                      "id": "spk-alexandra-guimaraes-teixeira",
-                      "nom": "Guimaraes Teixeira",
-                      "prenom": "Alexandra",
-                      "photo": "/BDD/photos/alexandra-guimaraes-teixeira.jpg",
-                      "entreprise": "ent-applause"
-                    },
-                    {
-                      "id": "spk-nabil-idhammou",
-                      "nom": "Idhammou",
-                      "prenom": "Nabil",
-                      "photo": "/BDD/photos/nabil-idhammou.jpg",
-                      "entreprise": "ent-groupe-one-point"
-                    },
-                    {
-                      "id": "spk-david-jedat",
-                      "nom": "Jedat",
-                      "prenom": "David",
-                      "photo": "/BDD/photos/david-jedat.jpg",
-                      "entreprise": "ent-groupe-one-point"
-                    },
-                    {
-                      "id": "spk-marius-ortega",
-                      "nom": "Ortega",
-                      "prenom": "Marius",
-                      "photo": "/BDD/photos/marius-ortega.jpg",
-                      "entreprise": "ent-groupe-one-point"
-                    },
-                    {
-                      "id": "spk-francois-xavier-le-gal",
-                      "nom": "Le Gal",
-                      "prenom": "François-Xavier",
-                      "photo": "/BDD/photos/francois-xavier-le-gal.jpg",
-                      "entreprise": "ent-mr-suricate"
-                    },
-                    {
-                      "id": "spk-rodolphe-jacquemin",
-                      "nom": "Jacquemin",
-                      "prenom": "Rodolphe",
-                      "photo": "/BDD/photos/rodolphe-jacquemin.jpg",
-                      "entreprise": "ent-mr-suricate"
-                    },
-                    {
                       "id": "spk-gil-burdallet",
                       "nom": "Burdallet",
                       "prenom": "Gil",
@@ -1388,18 +1255,11 @@
                       "entreprise": "ent-bnp-paribas-leasing-solutions"
                     },
                     {
-                      "id": "spk-remy-darras",
-                      "nom": "Darras",
-                      "prenom": "Rémy",
-                      "photo": "/BDD/photos/remy-darras.jpg",
-                      "entreprise": "ent-decathlon"
-                    },
-                    {
-                      "id": "spk-sabir-archkak",
-                      "nom": "Archkak",
-                      "prenom": "Sabir",
-                      "photo": "/BDD/photos/sabir-archkak.jpg",
-                      "entreprise": "ent-decathlon"
+                      "id": "spk-severine-cabocel",
+                      "nom": "Cabocel",
+                      "prenom": "Séverine",
+                      "photo": "/BDD/photos/severine-cabocel.jpg",
+                      "entreprise": "ent-france-travail"
                     },
                     {
                       "id": "spk-julien-cahu",
@@ -1409,25 +1269,60 @@
                       "entreprise": "ent-k-lagan"
                     },
                     {
-                      "id": "spk-sabeur-rahmouni",
-                      "nom": "Rahmouni",
-                      "prenom": "Sabeur",
-                      "photo": "/BDD/photos/sabeur-rahmouni.jpg",
-                      "entreprise": "ent-k-lagan"
-                    },
-                    {
-                      "id": "spk-emmanuel-pene",
-                      "nom": "Pene",
-                      "prenom": "Emmanuel",
-                      "photo": "/BDD/photos/emmanuel-pene.jpg",
-                      "entreprise": "ent-invarture"
-                    },
-                    {
                       "id": "spk-melodie-chapelier",
                       "nom": "Chapelier",
                       "prenom": "Melodie",
                       "photo": "/BDD/photos/melodie-chapelier.jpg",
                       "entreprise": "ent-invarture"
+                    },
+                    {
+                      "id": "spk-remy-darras",
+                      "nom": "Darras",
+                      "prenom": "Rémy",
+                      "photo": "/BDD/photos/remy-darras.jpg",
+                      "entreprise": "ent-decathlon"
+                    },
+                    {
+                      "id": "spk-olivier-denoo",
+                      "nom": "Denoo",
+                      "prenom": "Olivier",
+                      "photo": "/BDD/photos/olivier-denoo.jpg",
+                      "entreprise": "ent-cftl"
+                    },
+                    {
+                      "id": "spk-jean-francois-fresi",
+                      "nom": "Fresi",
+                      "prenom": "Jean-François",
+                      "photo": "/BDD/photos/jean-francois-fresi.png",
+                      "entreprise": "ent-shift-op-solutions"
+                    },
+                    {
+                      "id": "spk-michael-granier",
+                      "nom": "Granier",
+                      "prenom": "Michael",
+                      "photo": "/BDD/photos/michael-granier.jpg",
+                      "entreprise": "ent-no-code-testing"
+                    },
+                    {
+                      "id": "spk-florence-guerlais",
+                      "nom": "Guerlais",
+                      "prenom": "Florence",
+                      "photo": "/BDD/photos/florence-guerlais.jpg",
+                      "entreprise": "ent-non-communique"
+                    },
+                    {
+                      "id": "spk-alexandra-guimaraes-teixeira",
+                      "nom": "Guimaraes Teixeira",
+                      "prenom": "Alexandra",
+                      "photo": "/BDD/photos/alexandra-guimaraes-teixeira.jpg",
+                      "entreprise": "ent-applause"
+                    },
+                    {
+                      "id": "spk-karim-hedeoud-perrot",
+                      "nom": "Hedeoud-Perrot",
+                      "prenom": "Karim",
+                      "photo": "/BDD/photos/karim-hedeoud-perrot.jpg",
+                      "entreprise": "ent-non-communique"
                     },
                     {
                       "id": "spk-daphne-herve",
@@ -1437,17 +1332,122 @@
                       "entreprise": "ent-rca"
                     },
                     {
-                      "id": "spk-fanny-velsin",
-                      "nom": "Velsin",
-                      "prenom": "Fanny",
-                      "photo": "/BDD/photos/fanny-velsin.jpg",
+                      "id": "spk-nabil-idhammou",
+                      "nom": "Idhammou",
+                      "prenom": "Nabil",
+                      "photo": "/BDD/photos/nabil-idhammou.jpg",
+                      "entreprise": "ent-groupe-one-point"
+                    },
+                    {
+                      "id": "spk-rodolphe-jacquemin",
+                      "nom": "Jacquemin",
+                      "prenom": "Rodolphe",
+                      "photo": "/BDD/photos/rodolphe-jacquemin.jpg",
+                      "entreprise": "ent-mr-suricate"
+                    },
+                    {
+                      "id": "spk-david-jedat",
+                      "nom": "Jedat",
+                      "prenom": "David",
+                      "photo": "/BDD/photos/david-jedat.jpg",
+                      "entreprise": "ent-groupe-one-point"
+                    },
+                    {
+                      "id": "spk-anthony-labarre",
+                      "nom": "Labarre",
+                      "prenom": "Anthony",
+                      "photo": "/BDD/photos/anthony-labarre.jpg",
+                      "entreprise": "ent-mgdis"
+                    },
+                    {
+                      "id": "spk-francois-xavier-le-gal",
+                      "nom": "Le Gal",
+                      "prenom": "François-Xavier",
+                      "photo": "/BDD/photos/francois-xavier-le-gal.jpg",
+                      "entreprise": "ent-mr-suricate"
+                    },
+                    {
+                      "id": "spk-bruno-legeard",
+                      "nom": "Legeard",
+                      "prenom": "Bruno",
+                      "photo": "/BDD/photos/bruno-legeard.jpg",
+                      "entreprise": "ent-smartesting"
+                    },
+                    {
+                      "id": "spk-violaine-mansard-auduberteaud",
+                      "nom": "Mansard-Auduberteaud",
+                      "prenom": "Violaine",
+                      "photo": "/BDD/photos/violaine-mansard-auduberteaud.jpg",
+                      "entreprise": "ent-applause"
+                    },
+                    {
+                      "id": "spk-emmanuel-nocet",
+                      "nom": "Nocet",
+                      "prenom": "Emmanuel",
+                      "photo": "/BDD/photos/emmanuel-nocet.jpg",
+                      "entreprise": "ent-open"
+                    },
+                    {
+                      "id": "spk-gilles-nouais",
+                      "nom": "Nouais",
+                      "prenom": "Gilles",
+                      "photo": "/BDD/photos/gilles-nouais.jpg",
+                      "entreprise": "ent-niji"
+                    },
+                    {
+                      "id": "spk-marius-ortega",
+                      "nom": "Ortega",
+                      "prenom": "Marius",
+                      "photo": "/BDD/photos/marius-ortega.jpg",
+                      "entreprise": "ent-groupe-one-point"
+                    },
+                    {
+                      "id": "spk-pierre-yves-pamart",
+                      "nom": "Pamart",
+                      "prenom": "Pierre-Yves",
+                      "photo": "/BDD/photos/pierre-yves-pamart.jpg",
+                      "entreprise": "ent-societe-generale"
+                    },
+                    {
+                      "id": "spk-emmanuel-pene",
+                      "nom": "Pene",
+                      "prenom": "Emmanuel",
+                      "photo": "/BDD/photos/emmanuel-pene.jpg",
+                      "entreprise": "ent-invarture"
+                    },
+                    {
+                      "id": "spk-jean-marc-pires",
+                      "nom": "Pires",
+                      "prenom": "Jean-Marc",
+                      "photo": "/BDD/photos/jean-marc-pires.jpg",
+                      "entreprise": "ent-bnp-paribas-cardif"
+                    },
+                    {
+                      "id": "spk-sabeur-rahmouni",
+                      "nom": "Rahmouni",
+                      "prenom": "Sabeur",
+                      "photo": "/BDD/photos/sabeur-rahmouni.jpg",
+                      "entreprise": "ent-k-lagan"
+                    },
+                    {
+                      "id": "spk-gabriel-rousseau",
+                      "nom": "Rousseau",
+                      "prenom": "Gabriel",
+                      "photo": "/BDD/photos/gabriel-rousseau.jpg",
                       "entreprise": "ent-non-communique"
                     },
                     {
-                      "id": "spk-florence-guerlais",
-                      "nom": "Guerlais",
-                      "prenom": "Florence",
-                      "photo": "/BDD/photos/florence-guerlais.jpg",
+                      "id": "spk-bernard-rulmont",
+                      "nom": "Rulmont",
+                      "prenom": "Bernard",
+                      "photo": "/BDD/photos/bernard-rulmont.jpg",
+                      "entreprise": "ent-non-communique"
+                    },
+                    {
+                      "id": "spk-natia-sirbiladze",
+                      "nom": "Sirbiladze",
+                      "prenom": "Natia",
+                      "photo": "/BDD/photos/natia-sirbiladze.jpg",
                       "entreprise": "ent-non-communique"
                     },
                     {
@@ -1458,14 +1458,21 @@
                       "entreprise": "ent-non-communique"
                     },
                     {
-                      "id": "spk-bernard-rulmont",
-                      "nom": "Rulmont",
-                      "prenom": "Bernard",
-                      "photo": "/BDD/photos/bernard-rulmont.jpg",
+                      "id": "spk-fanny-velsin",
+                      "nom": "Velsin",
+                      "prenom": "Fanny",
+                      "photo": "/BDD/photos/fanny-velsin.jpg",
                       "entreprise": "ent-non-communique"
+                    },
+                    {
+                      "id": "spk-ami-kael",
+                      "nom": "kael",
+                      "prenom": "amistache",
+                      "photo": "https://y2ybxeyykio65b8g.public.blob.vercel-storage.com/medias/photos/ami-kael.jpg",
+                      "entreprise": "ent-agilitest"
                     }
                   ],
-                  "total": 37,
+                  "total": 38,
                   "filters": {
                     "id": null,
                     "nom": null,
@@ -1911,16 +1918,16 @@
                 "example": {
                   "items": [
                     {
-                      "id": "sal-auditorium-moebius",
-                      "nom": "Auditorium Moebius",
-                      "etage": 0,
-                      "contenance": 420
-                    },
-                    {
                       "id": "sal-auditorium-blin",
                       "nom": "Auditorium Blin",
                       "etage": 0,
                       "contenance": 260
+                    },
+                    {
+                      "id": "sal-auditorium-moebius",
+                      "nom": "Auditorium Moebius",
+                      "etage": 0,
+                      "contenance": 420
                     },
                     {
                       "id": "sal-grand-salon",
@@ -2381,76 +2388,10 @@
                 "example": {
                   "items": [
                     {
-                      "id": "ent-cftl",
-                      "nomEntreprise": "CFTL",
-                      "logo": "/BDD/logos/cftl.svg",
-                      "siteUrl": "https://cftl.fr/"
-                    },
-                    {
-                      "id": "ent-non-communique",
-                      "nomEntreprise": "Non communique",
-                      "logo": "/BDD/logos/non-communique.svg",
-                      "siteUrl": "https://github.com/CFTL-TAIA/programme-jftl"
-                    },
-                    {
-                      "id": "ent-mgdis",
-                      "nomEntreprise": "MGDIS",
-                      "logo": "/BDD/logos/mgdis.svg",
-                      "siteUrl": "https://www.mgdis.fr/"
-                    },
-                    {
-                      "id": "ent-niji",
-                      "nomEntreprise": "Niji",
-                      "logo": "/BDD/logos/niji.png",
-                      "siteUrl": "https://www.niji.fr/"
-                    },
-                    {
-                      "id": "ent-smartesting",
-                      "nomEntreprise": "Smartesting",
-                      "logo": "/BDD/logos/smartesting.png",
-                      "siteUrl": "https://www.smartesting.com/"
-                    },
-                    {
-                      "id": "ent-sii",
-                      "nomEntreprise": "SII",
-                      "logo": "/BDD/logos/sii.png",
-                      "siteUrl": "https://sii-group.com/fr-FR"
-                    },
-                    {
-                      "id": "ent-france-travail",
-                      "nomEntreprise": "France Travail",
-                      "logo": "/BDD/logos/france-travail.png",
-                      "siteUrl": "https://www.francetravail.fr/"
-                    },
-                    {
-                      "id": "ent-no-code-testing",
-                      "nomEntreprise": "No Code Testing",
-                      "logo": "/BDD/logos/no-code-testing.svg",
-                      "siteUrl": "https://www.nocodetesting.com/"
-                    },
-                    {
-                      "id": "ent-open",
-                      "nomEntreprise": "Open",
-                      "logo": "/BDD/logos/open.png",
-                      "siteUrl": "https://www.open.global/"
-                    },
-                    {
-                      "id": "ent-bnp-paribas-cardif",
-                      "nomEntreprise": "BNP Paribas Cardif",
-                      "logo": "/BDD/logos/bnp-paribas-cardif.svg",
-                      "siteUrl": "https://www.bnpparibascardif.com/"
-                    },
-                    {
-                      "id": "ent-societe-generale",
-                      "nomEntreprise": "Societe Generale",
-                      "logo": "/BDD/logos/societe-generale.svg",
-                      "siteUrl": "https://www.societegenerale.com/"
-                    },
-                    {
-                      "id": "ent-shift-op-solutions",
-                      "nomEntreprise": "Shift Op Solutions",
-                      "logo": "/BDD/logos/shift-op-solutions.png",
-                      "siteUrl": "https://www.shift-op.com/"
+                      "id": "ent-agilitest",
+                      "nomEntreprise": "Agilitest",
+                      "logo": "/BDD/logos/agilitest.png",
+                      "siteUrl": "https://fr.agilitest.com/"
                     },
                     {
                       "id": "ent-alpharho-solutions",
@@ -2459,64 +2400,10 @@
                       "siteUrl": "https://alpharho-solutions.com/"
                     },
                     {
-                      "id": "ent-universite-bordeaux",
-                      "nomEntreprise": "Universite de Bordeaux",
-                      "logo": "/BDD/logos/universite-bordeaux.png",
-                      "siteUrl": "https://www.u-bordeaux.fr/"
-                    },
-                    {
                       "id": "ent-applause",
                       "nomEntreprise": "Applause",
                       "logo": "/BDD/logos/applause.svg",
                       "siteUrl": "https://www.applause.com/"
-                    },
-                    {
-                      "id": "ent-groupe-one-point",
-                      "nomEntreprise": "Groupe One Point",
-                      "logo": "/BDD/logos/groupe-one-point.png",
-                      "siteUrl": "https://www.groupeonepoint.com/fr/"
-                    },
-                    {
-                      "id": "ent-mr-suricate",
-                      "nomEntreprise": "Mr Suricate",
-                      "logo": "/BDD/logos/mr-suricate.svg",
-                      "siteUrl": "https://www.mrsuricate.com/"
-                    },
-                    {
-                      "id": "ent-bnp-paribas-leasing-solutions",
-                      "nomEntreprise": "BNP Paribas Leasing Solutions",
-                      "logo": "/BDD/logos/bnp-paribas-leasing-solutions.svg",
-                      "siteUrl": "https://leasingsolutions.bnpparibas.com/fr"
-                    },
-                    {
-                      "id": "ent-decathlon",
-                      "nomEntreprise": "Decathlon",
-                      "logo": "/BDD/logos/decathlon.png",
-                      "siteUrl": "https://www.decathlon.fr/"
-                    },
-                    {
-                      "id": "ent-k-lagan",
-                      "nomEntreprise": "K-LAGAN",
-                      "logo": "/BDD/logos/k-lagan.png",
-                      "siteUrl": "https://www.k-lagan.com/"
-                    },
-                    {
-                      "id": "ent-invarture",
-                      "nomEntreprise": "Invarture",
-                      "logo": "/BDD/logos/invarture.svg",
-                      "siteUrl": "https://invarture.com/"
-                    },
-                    {
-                      "id": "ent-rca",
-                      "nomEntreprise": "RCA",
-                      "logo": "/BDD/logos/rca.png",
-                      "siteUrl": "https://www.rca.fr/"
-                    },
-                    {
-                      "id": "ent-agilitest",
-                      "nomEntreprise": "Agilitest",
-                      "logo": "/BDD/logos/agilitest.png",
-                      "siteUrl": "https://fr.agilitest.com/"
                     },
                     {
                       "id": "ent-arcad-software",
@@ -2525,16 +2412,106 @@
                       "siteUrl": "https://www.arcadsoftware.fr/dot/"
                     },
                     {
+                      "id": "ent-athenco",
+                      "nomEntreprise": "Athenco",
+                      "logo": "/BDD/logos/athenco.png",
+                      "siteUrl": "https://athenco.com/"
+                    },
+                    {
+                      "id": "ent-bnp-paribas-cardif",
+                      "nomEntreprise": "BNP Paribas Cardif",
+                      "logo": "/BDD/logos/bnp-paribas-cardif.svg",
+                      "siteUrl": "https://www.bnpparibascardif.com/"
+                    },
+                    {
+                      "id": "ent-bnp-paribas-leasing-solutions",
+                      "nomEntreprise": "BNP Paribas Leasing Solutions",
+                      "logo": "/BDD/logos/bnp-paribas-leasing-solutions.svg",
+                      "siteUrl": "https://leasingsolutions.bnpparibas.com/fr"
+                    },
+                    {
+                      "id": "ent-cftl",
+                      "nomEntreprise": "CFTL",
+                      "logo": "/BDD/logos/cftl.svg",
+                      "siteUrl": "https://cftl.fr/"
+                    },
+                    {
+                      "id": "ent-decathlon",
+                      "nomEntreprise": "Decathlon",
+                      "logo": "/BDD/logos/decathlon.png",
+                      "siteUrl": "https://www.decathlon.fr/"
+                    },
+                    {
+                      "id": "ent-digital-ai",
+                      "nomEntreprise": "Digital AI",
+                      "logo": "/BDD/logos/digital-ai.png",
+                      "siteUrl": "https://digital.ai/fr/"
+                    },
+                    {
+                      "id": "ent-france-travail",
+                      "nomEntreprise": "France Travail",
+                      "logo": "/BDD/logos/france-travail.png",
+                      "siteUrl": "https://www.francetravail.fr/"
+                    },
+                    {
+                      "id": "ent-groupe-one-point",
+                      "nomEntreprise": "Groupe One Point",
+                      "logo": "/BDD/logos/groupe-one-point.png",
+                      "siteUrl": "https://www.groupeonepoint.com/fr/"
+                    },
+                    {
+                      "id": "ent-invarture",
+                      "nomEntreprise": "Invarture",
+                      "logo": "/BDD/logos/invarture.svg",
+                      "siteUrl": "https://invarture.com/"
+                    },
+                    {
+                      "id": "ent-k-lagan",
+                      "nomEntreprise": "K-LAGAN",
+                      "logo": "/BDD/logos/k-lagan.png",
+                      "siteUrl": "https://www.k-lagan.com/"
+                    },
+                    {
                       "id": "ent-kalifast",
                       "nomEntreprise": "Kalifast",
                       "logo": "/BDD/logos/kalifast.svg",
                       "siteUrl": "https://www.kalifast.com/"
                     },
                     {
-                      "id": "ent-athenco",
-                      "nomEntreprise": "Athenco",
-                      "logo": "/BDD/logos/athenco.png",
-                      "siteUrl": "https://athenco.com/"
+                      "id": "ent-mgdis",
+                      "nomEntreprise": "MGDIS",
+                      "logo": "/BDD/logos/mgdis.svg",
+                      "siteUrl": "https://www.mgdis.fr/"
+                    },
+                    {
+                      "id": "ent-mr-suricate",
+                      "nomEntreprise": "Mr Suricate",
+                      "logo": "/BDD/logos/mr-suricate.svg",
+                      "siteUrl": "https://www.mrsuricate.com/"
+                    },
+                    {
+                      "id": "ent-niji",
+                      "nomEntreprise": "Niji",
+                      "logo": "/BDD/logos/niji.png",
+                      "siteUrl": "https://www.niji.fr/"
+                    },
+                    {
+                      "id": "ent-no-code-testing",
+                      "nomEntreprise": "No Code Testing",
+                      "logo": "/BDD/logos/no-code-testing.svg",
+                      "siteUrl": "https://www.nocodetesting.com/"
+                    },
+                    {
+                      "id": "ent-non-communique",
+                      "nomEntreprise": "Non communique",
+                      "logo": "/BDD/logos/non-communique.svg",
+                      "siteUrl": "https://github.com/CFTL-TAIA/programme-jftl"
+                    },
+                    {
+                      "id": "ent-open",
+                      "nomEntreprise": "Open",
+                      "logo": "/BDD/logos/open.png",
+                      "siteUrl": "https://www.open.global/"
                     },
                     {
                       "id": "ent-opentext",
@@ -2543,10 +2520,34 @@
                       "siteUrl": "https://www.opentext.com/products/devops-cloud"
                     },
                     {
-                      "id": "ent-unguess",
-                      "nomEntreprise": "Unguess",
-                      "logo": "/BDD/logos/unguess.png",
-                      "siteUrl": "https://www.unguess.io/"
+                      "id": "ent-rca",
+                      "nomEntreprise": "RCA",
+                      "logo": "/BDD/logos/rca.png",
+                      "siteUrl": "https://www.rca.fr/"
+                    },
+                    {
+                      "id": "ent-sii",
+                      "nomEntreprise": "SII",
+                      "logo": "/BDD/logos/sii.png",
+                      "siteUrl": "https://sii-group.com/fr-FR"
+                    },
+                    {
+                      "id": "ent-shift-op-solutions",
+                      "nomEntreprise": "Shift Op Solutions",
+                      "logo": "/BDD/logos/shift-op-solutions.png",
+                      "siteUrl": "https://www.shift-op.com/"
+                    },
+                    {
+                      "id": "ent-smartesting",
+                      "nomEntreprise": "Smartesting",
+                      "logo": "/BDD/logos/smartesting.png",
+                      "siteUrl": "https://www.smartesting.com/"
+                    },
+                    {
+                      "id": "ent-societe-generale",
+                      "nomEntreprise": "Societe Generale",
+                      "logo": "/BDD/logos/societe-generale.svg",
+                      "siteUrl": "https://www.societegenerale.com/"
                     },
                     {
                       "id": "ent-uipath",
@@ -2555,10 +2556,16 @@
                       "siteUrl": "https://www.uipath.com/"
                     },
                     {
-                      "id": "ent-digital-ai",
-                      "nomEntreprise": "Digital AI",
-                      "logo": "/BDD/logos/digital-ai.png",
-                      "siteUrl": "https://digital.ai/fr/"
+                      "id": "ent-unguess",
+                      "nomEntreprise": "Unguess",
+                      "logo": "/BDD/logos/unguess.png",
+                      "siteUrl": "https://www.unguess.io/"
+                    },
+                    {
+                      "id": "ent-universite-bordeaux",
+                      "nomEntreprise": "Universite de Bordeaux",
+                      "logo": "/BDD/logos/universite-bordeaux.png",
+                      "siteUrl": "https://www.u-bordeaux.fr/"
                     }
                   ],
                   "total": 30,
@@ -3177,10 +3184,6 @@
                     "message": {
                       "type": "string",
                       "description": "Message de retour pour l’interface admin."
-                    },
-                    "storage": {
-                      "type": "string",
-                      "description": "Mode de stockage effectivement utilise pour l upload media."
                     }
                   }
                 },

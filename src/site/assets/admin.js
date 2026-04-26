@@ -1,10 +1,10 @@
-import { escapeHtml, fetchCollection, getSpeakerFullName, resolveSiteUrl, unregisterLegacyServiceWorkers } from './shared.js';
+import { compareSpeakersByName, escapeHtml, fetchCollection, getSpeakerLastNameFirst, resolveSiteUrl, unregisterLegacyServiceWorkers } from './shared.js';
 
 const sessionTokenKey = 'taia-admin-token';
 const sessionDateKey = 'taia-admin-date';
 const sessionScopeKey = 'taia-admin-scope';
 const sessionPermissionsKey = 'taia-admin-permissions';
-const adminReloadDelayMs = 5000;
+const adminReloadDelayMs = 1000;
 
 const conferenceTypeOptions = [
   { value: 'session', label: 'Session' },
@@ -14,6 +14,14 @@ const conferenceTypeOptions = [
   { value: 'demo', label: 'Démo éditeur' },
   { value: 'closing', label: 'Clôture' }
 ];
+
+function getAdminSpeakerLabel(speaker) {
+  return getSpeakerLastNameFirst(speaker);
+}
+
+function getConferenceTypeLabel(type) {
+  return conferenceTypeOptions.find((option) => option.value === type)?.label || type;
+}
 
 const resourceConfigs = {
   conference: {
@@ -27,8 +35,8 @@ const resourceConfigs = {
     fields: [
       { name: 'nom', label: 'Titre', type: 'text', required: true },
       { name: 'horaire', label: 'Date et heure', type: 'datetime-local', required: true },
-      { name: 'type', label: 'Type', type: 'select', required: true, options: conferenceTypeOptions },
-      { name: 'speakerIds', label: 'Speakers liés', type: 'multiselect', optionsFrom: 'speaker', optionLabel: (item) => getSpeakerFullName(item) },
+      { name: 'type', label: 'Type', type: 'select', required: true, options: conferenceTypeOptions, fullWidth: true, className: 'admin-field-type-select' },
+      { name: 'speakerIds', label: 'Speakers liés', type: 'multiselect', optionsFrom: 'speaker', optionLabel: (item) => getAdminSpeakerLabel(item) },
       { name: 'salleIds', label: 'Salles liées', type: 'multiselect', optionsFrom: 'salle', optionLabel: (item) => item.nom }
     ]
   },
@@ -38,7 +46,7 @@ const resourceConfigs = {
     endpoint: '/api/speaker',
     accentClass: 'accent-teal',
     idPrefix: 'spk',
-    optionLabel: (item) => getSpeakerFullName(item),
+    optionLabel: (item) => getAdminSpeakerLabel(item),
     idSource: (payload) => `${payload.prenom || ''} ${payload.nom || ''}`,
     fields: [
       { name: 'prenom', label: 'Prénom', type: 'text', required: true },
@@ -258,7 +266,13 @@ function setActionBusy(card, isBusy) {
 }
 
 function getResourceOptions(resourceType) {
-  return state.resources[resourceType] || [];
+  const items = state.resources[resourceType] || [];
+
+  if (resourceType === 'speaker') {
+    return [...items].sort(compareSpeakersByName);
+  }
+
+  return items;
 }
 
 function buildSlugPart(value) {
@@ -340,6 +354,36 @@ function buildSelectOptions(field) {
   return getResourceOptions(field.optionsFrom).map((item) => ({ value: item.id, label: field.optionLabel(item) }));
 }
 
+function buildConferenceGroupedOptionsMarkup(items, selectedId) {
+  const itemsByType = new Map(conferenceTypeOptions.map((option) => [option.value, []]));
+
+  for (const item of items) {
+    const group = itemsByType.get(item.type) || [];
+    group.push(item);
+    itemsByType.set(item.type, group);
+  }
+
+  return conferenceTypeOptions
+    .map((typeOption) => {
+      const conferences = (itemsByType.get(typeOption.value) || [])
+        .slice()
+        .sort((left, right) => left.nom.localeCompare(right.nom, 'fr'));
+
+      if (conferences.length === 0) {
+        return '';
+      }
+
+      return `
+        <optgroup label="${escapeHtml(getConferenceTypeLabel(typeOption.value))}">
+          ${conferences
+            .map((item) => `<option value="${escapeHtml(item.id)}" ${item.id === selectedId ? 'selected' : ''}>${escapeHtml(item.nom)}</option>`)
+            .join('')}
+        </optgroup>
+      `;
+    })
+    .join('');
+}
+
 function buildMediaPreviewMarkup(field, currentValue) {
   if (!currentValue) {
     return `
@@ -361,7 +405,7 @@ function buildFieldMarkup(resourceType, field, value, mode) {
   const fieldId = `${mode}-${resourceType}-${field.name}`;
   const label = `${field.label}${field.required ? ' *' : ''}`;
   const currentValue = getFieldValue(field, value);
-  const fieldClassName = `admin-field${field.fullWidth ? ' admin-field-full' : ''}`;
+  const fieldClassName = `admin-field${field.fullWidth ? ' admin-field-full' : ''}${field.className ? ` ${field.className}` : ''}`;
 
   if (field.type === 'select') {
     const options = buildSelectOptions(field);
@@ -472,9 +516,11 @@ function buildCardMarkup(resourceType, mode) {
       <label class="admin-field">
         <span>${escapeHtml(config.singularLabel)} existante *</span>
         <select data-role="resource-select">
-          ${getResourceOptions(resourceType)
-            .map((item) => `<option value="${escapeHtml(item.id)}" ${item.id === selectedItem?.id ? 'selected' : ''}>${escapeHtml(config.optionLabel(item))}</option>`)
-            .join('')}
+          ${resourceType === 'conference'
+            ? buildConferenceGroupedOptionsMarkup(getResourceOptions(resourceType), selectedItem?.id)
+            : getResourceOptions(resourceType)
+              .map((item) => `<option value="${escapeHtml(item.id)}" ${item.id === selectedItem?.id ? 'selected' : ''}>${escapeHtml(config.optionLabel(item))}</option>`)
+              .join('')}
         </select>
       </label>
     `;
@@ -779,13 +825,14 @@ async function uploadMediaFile({ card, form, resourceType, mode, field, file }) 
 async function loadResource(resourceType) {
   const payload = await fetchCollection(resourceConfigs[resourceType].endpoint);
   state.resources[resourceType] = payload.items;
+  const options = getResourceOptions(resourceType);
 
-  if (!state.selectedIds.update[resourceType] && payload.items[0]) {
-    state.selectedIds.update[resourceType] = payload.items[0].id;
+  if (!state.selectedIds.update[resourceType] && options[0]) {
+    state.selectedIds.update[resourceType] = options[0].id;
   }
 
-  if (!state.selectedIds.delete[resourceType] && payload.items[0]) {
-    state.selectedIds.delete[resourceType] = payload.items[0].id;
+  if (!state.selectedIds.delete[resourceType] && options[0]) {
+    state.selectedIds.delete[resourceType] = options[0].id;
   }
 }
 

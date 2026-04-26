@@ -2,7 +2,7 @@
 
 ## User Story
 
-En tant qu'utilisateur du projet API TAIA, je veux appeler le service `GET /api/conference` avec des filtres optionnels afin de consulter rapidement les conferences stockees dans la zone BDD JSON.
+En tant qu'utilisateur du projet API TAIA, je veux appeler le service `GET /api/conference` avec des filtres optionnels afin de consulter rapidement les conferences persistees dans la base du projet.
 
 ## Valeur attendue
 

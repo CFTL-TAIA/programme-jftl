@@ -6,7 +6,7 @@
 - Un espace API separe pour documenter les endpoints
 - Des pages separees pour conferences, speakers, salles et entreprises
 - Vraie API locale et serverless compatible Vercel
-- Zone BDD JSON a la racine du projet
+- Zone BDD JSON a la racine du projet servant de source de seed
 - Endpoints `GET /api/conference`, `GET /api/speaker`, `GET /api/salle` et `GET /api/entreprise`
 - Endpoints d'admin `GET /api/admin/token` et `POST /api/admin/token`
 - Endpoint d'upload admin `POST /api/admin/media`
@@ -18,7 +18,7 @@
 
 - Node.js est utilise pour construire le site statique et pour executer l'API localement
 - Vercel expose les routes `/api/*` comme fonctions serverless reelles
-- Les reponses API sont construites depuis des fichiers de donnees JSON versionnes dans `BDD/`, avec un mode hybride Blob/local pour les lectures et ecritures quand les tokens de stockage sont presents
+- Les reponses API sont construites depuis Postgres quand `DATABASE_URL` est configure ; les JSON versionnes servent uniquement au seed et a l'initialisation des donnees
 - Le serveur local `scripts/preview.mjs` reutilise la meme logique que les fonctions serverless
 - Le Swagger consomme le fichier OpenAPI genere et peut executer des requetes vers la vraie API sur le meme site
 - La page Swagger charge maintenant `swagger-ui-dist@5.32.4` via CDN pour repartir d'une base UI a jour avant toute personnalisation supplementaire
@@ -30,7 +30,7 @@
 - L'admin repose sur un JWT quotidien a scopes : `editor` pour modifier, `admin-plus` pour creer et supprimer en plus
 - Les mots de passe admin sont exclusivement attendus via variables d'environnement cote serveur
 - L'admin permet aussi un upload direct de photos et logos avec deux modes : Blob public sur Vercel si `taia_READ_WRITE_TOKEN` est present, ou fallback local avec copie dans `BDD/` et `dist/BDD/`
-- Les CRUD JSON basculent sur Blob prive `Data/` si `bdd_READ_WRITE_TOKEN` est present, sinon restent sur `BDD/*.json`
+- Les CRUD metier utilisent Postgres et requierent `DATABASE_URL`
 - Les uploads admin sont limites a 2 Mo et controles aussi sur les dimensions : photo `1200 x 1600 px`, logo `1600 x 800 px`
 - Apres un create, update ou delete reussi dans l'admin, l'interface force un rechargement complet differe de `2 s` pour rendre visibles les ecritures Blob eventuellement retardees
 - La suppression d'un `speaker` ou d'une `entreprise` supprime aussi le media associe si l'URL ou le chemin pointe vers un media gere par TAIA
@@ -41,10 +41,12 @@
 - `api/` : fonctions serverless Vercel
 - `lib/api-service.mjs` : logique de lecture et de filtrage partagee
 - `lib/openapi.mjs` : generation OpenAPI partagee
-- `BDD/` : donnees JSON servant de base aux reponses et emplacement des photos et logos
+- `BDD/` : donnees JSON de seed et emplacement des photos et logos locaux
 - `scripts/build.mjs` : generation du site et du fichier OpenAPI
 - `scripts/print-admin-token.mjs` : generation locale d'un JWT admin de test
-- `scripts/seed-blob.mjs` : pousse les JSON et medias locaux vers les stores Blob Vercel
+- `scripts/seed-blob.mjs` : pousse les medias locaux vers le store Blob Vercel
+- `scripts/seed-postgres.mjs` : pousse les JSON locaux vers Postgres
+- `docker-compose.postgres.yml` : Postgres local de developpement via Docker
 - `src/site/` : front programme, espace API et pages detaillees
 - `docs/Swagger/index.html` : interface Swagger
 - `lib/admin-media.mjs` : logique de stockage local des photos et logos uploades depuis l'admin
@@ -54,9 +56,12 @@
 
 ```bash
 npm run build
+npm run db:up
+npm run db:down
 npm run free-local-port
 npm run dev
 npm run admin-token
+npm run seed-postgres
 npm run seed-blob
 ```
 
@@ -64,11 +69,14 @@ npm run seed-blob
 
 - Toute nouvelle route doit etre ajoutee dans `src/api/routes.mjs`, puis implementee ou branchee dans `api/`
 - Toute evolution de l'admin doit conserver l'absence de secret dans le code, Swagger et les docs versionnees
-- Les JSON de `BDD/` restent la source de seed et le fallback local, mais la persistance distante cible maintenant Vercel Blob avec `bdd_READ_WRITE_TOKEN`
-- Les ecritures API locales sont maintenant validees cote serveur avant persistance des fichiers JSON
+- Les JSON de `BDD/` restent la source de seed, mais la persistance runtime cible maintenant Postgres avec `DATABASE_URL`
+- Le mode recommande et attendu pour valider le comportement reel est maintenant Postgres aussi en local ; le runtime JSON local a ete retire pour limiter la dette technique
+- Les ecritures API locales sont maintenant validees cote serveur avant persistance Postgres
 - Les uploads admin de photos et logos ecrivent en Blob public sur Vercel quand `taia_READ_WRITE_TOKEN` est present ; sinon ils restent copies localement pour le preview
 - Les suppressions admin de `speaker` et `entreprise` nettoient aussi les photos/logos associes quand ils sont stockes sous `BDD/` ou dans Blob `medias/`
-- Les variables de stockage attendues sont `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN`
+- Les variables de stockage attendues sont `DATABASE_URL` pour les donnees et `taia_READ_WRITE_TOKEN` pour les medias
+- En local, `taia_READ_WRITE_TOKEN` peut pointer vers un store Blob de dev distinct pour tester les uploads sans toucher aux medias de production
+- Le split recommande des environnements est `DATABASE_URL` differente pour `dev`, `preview` et `prod`
 - Le programme source correspond a la JFTL du 9 juin 2026 au Beffroi de Montrouge, reconstruit depuis `docs/Programme-JFTL26.pdf` puis consolide avec la page officielle CFTL
 - Les liaisons conferences > speakers > salles sont a jour dans les trois fichiers JSON de `BDD/`
 - Les liaisons speakers > entreprises sont presentes dans `BDD/Speakers.json` et `BDD/Entreprise.json`
@@ -85,6 +93,18 @@ npm run seed-blob
 
 ## Prochaines etapes pertinentes
 
-- Executer `npm run seed-blob` une premiere fois avec les tokens Vercel pour initialiser `Data/` et `medias/`
+- Executer `npm run seed-postgres` une premiere fois avec `DATABASE_URL` pour initialiser la base metier
+- Executer `npm run seed-blob` une premiere fois avec `taia_READ_WRITE_TOKEN` pour initialiser les medias
+
+## Regle de maintenance documentaire
+
+Quand une fonctionnalite, un comportement technique ou un process de dev change, mettre a jour au minimum :
+
+- `docs/chat.md` pour conserver les echanges utilisateur / reponse finale
+- `README.md` pour la documentation utilisateur et les pas a pas
+- `docs/handoff.md` pour transmettre le contexte entre sessions ou LLM
+- `docs/UserStories/*.md` pour les user stories impactees ou nouvelles
+- `docs/UserStories/usecase/*_Test.md` pour les cas de tests d'acceptation impactes
+- `docs/Swagger/openapi.json` et sa source `src/api/routes.mjs` si le contrat API change
 - Ajouter des tests automatiques de filtrage, d'authentification et de scopes admin
 - Ajouter des tests de navigation front pour les pages programme, conferences, speakers, salles, entreprises et admin

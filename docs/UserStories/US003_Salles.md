@@ -2,7 +2,7 @@
 
 ## User Story
 
-En tant qu'utilisateur du projet API TAIA, je veux consulter les salles via `GET /api/salle` afin d'identifier facilement les espaces disponibles dans la BDD JSON.
+En tant qu'utilisateur du projet API TAIA, je veux consulter les salles via `GET /api/salle` afin d'identifier facilement les espaces disponibles dans la base du projet.
 
 ## Valeur attendue
 

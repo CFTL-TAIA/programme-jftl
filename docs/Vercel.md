@@ -27,7 +27,7 @@ Deployer le projet sur Vercel avec :
 5. Ajouter les deux variables suivantes :
    - `TAIA_ADMIN_EDITOR_PASSWORD`
    - `TAIA_ADMIN_SUPER_PASSWORD`
-   - `bdd_READ_WRITE_TOKEN`
+   - `DATABASE_URL`
    - `taia_READ_WRITE_TOKEN`
 6. Saisir vos vraies valeurs secretes pour chaque environnement cible.
 7. Relancer un deploiement apres ajout ou modification des variables.
@@ -36,8 +36,9 @@ Deployer le projet sur Vercel avec :
 
 Pour un premier deploiement propre :
 
-- definir les deux variables au minimum pour `Production`
-- definir aussi les deux variables pour `Preview` si vous voulez tester l'admin sur les branches ou pull requests
+- definir `DATABASE_URL` de production pour `Production`
+- definir une `DATABASE_URL` differente pour `Preview` si vous voulez tester l'admin sur les branches ou pull requests
+- definir les deux mots de passe admin au minimum pour `Production` et `Preview` selon votre besoin
 - ne jamais mettre les vraies valeurs dans le depot, Swagger, README ou les user stories
 
 ## Verification apres deploiement
@@ -78,20 +79,32 @@ Pour recuperer aussi les variables Blob en local :
 vercel env pull
 ```
 
-## Persistance Blob retenue
+## Persistance retenue
 
-Le projet s'appuie maintenant sur deux stores Blob Vercel :
+Le projet s'appuie maintenant sur :
 
-- `taia-bdd` en prive pour les JSON metier, sous `Data/`
+- une base Postgres distante pour les donnees metier, alimentee par `DATABASE_URL`
 - `taia-fichier` en public pour les medias, sous `medias/photos` et `medias/logos`
 
 Mode de fonctionnement :
 
-- sur Vercel avec `bdd_READ_WRITE_TOKEN`, les CRUD JSON lisent et ecrivent dans Blob prive
+- sur Vercel avec `DATABASE_URL`, les CRUD metier lisent et ecrivent dans Postgres
 - sur Vercel avec `taia_READ_WRITE_TOKEN`, les uploads admin publient les medias dans Blob public
-- en local sans token, le projet garde un fallback sur `BDD/` pour ne pas imposer Blob a chaque developpeur
+- les JSON versionnes de `BDD/` servent uniquement de source de seed pour Postgres
 
-Commande utile pour initialiser les stores a partir des fichiers versionnes :
+Recommandation Neon :
+
+- une base `dev` pour `.env.local`
+- une base `prod` differente pour Vercel `Production`
+- eventuellement une base `preview` ou une branche Neon pour Vercel `Preview`
+
+Commande utile pour initialiser la base Postgres a partir des fichiers versionnes :
+
+```bash
+npm run seed-postgres
+```
+
+Commande utile pour initialiser le store media Blob a partir des fichiers versionnes :
 
 ```bash
 npm run seed-blob
@@ -114,7 +127,7 @@ Le controle est fait a deux niveaux :
 2. `npm run dev` fonctionne sur `http://localhost:8080`
 3. `TAIA_ADMIN_EDITOR_PASSWORD` configure sur Vercel
 4. `TAIA_ADMIN_SUPER_PASSWORD` configure sur Vercel
-5. `bdd_READ_WRITE_TOKEN` configure sur Vercel
+5. `DATABASE_URL` configure sur Vercel
 6. `taia_READ_WRITE_TOKEN` configure sur Vercel
 7. deploy relance apres ajout des variables
 8. test de `/api/admin/token` effectue

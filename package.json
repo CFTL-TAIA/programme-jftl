@@ -8,17 +8,21 @@
     "node": ">=20"
   },
   "scripts": {
+    "db:down": "docker compose -f docker-compose.postgres.yml down",
+    "db:up": "docker compose -f docker-compose.postgres.yml up -d",
     "admin-token": "node ./scripts/print-admin-token.mjs",
     "build": "node ./scripts/build.mjs",
+    "seed-postgres": "node ./scripts/seed-postgres.mjs",
     "clean": "node ./scripts/clean.mjs",
     "dev": "npm run build && npm run free-local-port && node ./scripts/preview.mjs",
     "free-local-port": "node ./scripts/free-local-port.mjs",
     "seed-blob": "node ./scripts/seed-blob.mjs",
-    "start": "node ./scripts/preview.mjs",
+    "start": "npm run build && node ./scripts/preview.mjs",
     "vercel-build": "node ./scripts/build.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.3.3",
-    "image-size": "^2.0.2"
+    "image-size": "^2.0.2",
+    "postgres": "^3.4.9"
   }
 }

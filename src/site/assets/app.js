@@ -1,4 +1,4 @@
-import { escapeHtml, fetchCollection, formatTime, resolveSiteUrl, unregisterLegacyServiceWorkers } from './shared.js';
+import { compareSpeakersByName, escapeHtml, fetchCollection, formatTime, getSpeakerFullName, resolveSiteUrl, unregisterLegacyServiceWorkers } from './shared.js';
 
 function renderEmptyState(containerId, message) {
   const container = document.getElementById(containerId);
@@ -42,9 +42,9 @@ function renderSpeakers(items) {
     .map((speaker) => {
       return `
         <li class="resource-item">
-          <img class="speaker-photo-image" src="${escapeHtml(resolveSiteUrl(speaker.photo))}" alt="Portrait de ${escapeHtml(`${speaker.prenom} ${speaker.nom}`)}" />
+          <img class="speaker-photo-image" src="${escapeHtml(resolveSiteUrl(speaker.photo))}" alt="Portrait de ${escapeHtml(getSpeakerFullName(speaker))}" />
           <div>
-            <h3>${escapeHtml(`${speaker.prenom} ${speaker.nom}`)}</h3>
+            <h3>${escapeHtml(getSpeakerFullName(speaker))}</h3>
             <div class="resource-meta">
               <span class="pill">${escapeHtml(speaker.id)}</span>
               <span class="pill">${escapeHtml(speaker.photo)}</span>
@@ -150,7 +150,7 @@ async function loadDashboard() {
     );
 
     renderConferences(conferences.items);
-    renderSpeakers(speakers.items);
+    renderSpeakers([...speakers.items].sort(compareSpeakersByName));
     renderSalles(salles.items);
     renderEntreprises(entreprises.items);
   } catch (error) {

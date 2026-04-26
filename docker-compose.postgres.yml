@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: taia-postgres
+    environment:
+      POSTGRES_DB: taia
+      POSTGRES_USER: taia
+      POSTGRES_PASSWORD: taia
+    ports:
+      - '5432:5432'
+    volumes:
+      - taia-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  taia-postgres-data:

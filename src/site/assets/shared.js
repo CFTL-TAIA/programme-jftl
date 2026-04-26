@@ -80,8 +80,19 @@ export async function fetchCollection(path) {
   return response.json();
 }
 
+export function formatNamePart(value) {
+  return String(value || '')
+    .trim()
+    .toLocaleLowerCase('fr-FR')
+    .replace(/(^|[\s'’-])(\p{L})/gu, (match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase('fr-FR')}`);
+}
+
 export function getSpeakerFullName(speaker) {
-  return `${speaker.prenom} ${speaker.nom}`;
+  return `${formatNamePart(speaker.prenom)} ${formatNamePart(speaker.nom)}`.trim();
+}
+
+export function getSpeakerLastNameFirst(speaker) {
+  return `${formatNamePart(speaker.nom)} ${formatNamePart(speaker.prenom)}`.trim();
 }
 
 function normalizeText(value) {
@@ -89,6 +100,12 @@ function normalizeText(value) {
     .normalize('NFD')
     .replaceAll(/[\u0300-\u036f]/g, '')
     .toLowerCase();
+}
+
+export function compareSpeakersByName(left, right) {
+  const leftName = `${normalizeText(left.nom)} ${normalizeText(left.prenom)}`.trim();
+  const rightName = `${normalizeText(right.nom)} ${normalizeText(right.prenom)}`.trim();
+  return leftName.localeCompare(rightName, 'fr', { sensitivity: 'base' });
 }
 
 export function formatTime(isoString) {
@@ -151,11 +168,7 @@ export async function fetchDataset() {
   ]);
 
   const conferences = [...conferencePayload.items].sort(sortConferencesByTime);
-  const speakers = [...speakerPayload.items].sort((left, right) => {
-    const leftName = `${left.nom} ${left.prenom}`;
-    const rightName = `${right.nom} ${right.prenom}`;
-    return leftName.localeCompare(rightName, 'fr');
-  });
+  const speakers = [...speakerPayload.items].sort(compareSpeakersByName);
   const salles = [...sallePayload.items].sort((left, right) => {
     return left.etage - right.etage || left.nom.localeCompare(right.nom, 'fr');
   });

@@ -7,7 +7,7 @@ En tant que visiteur du projet API TAIA, je veux afficher sur la page d'accueil 
 ## Valeur attendue
 
 - proposer une vraie experience front oriente evenement
-- exposer le contenu reel de la BDD JSON au lieu d'exemples fictifs
+- exposer le contenu reel de la base du projet au lieu d'exemples fictifs
 - faciliter la navigation vers les pages detaillees du site
 - distinguer visuellement les demos editeurs du reste du programme
 

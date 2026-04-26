@@ -744,6 +744,9 @@ code,
   display: grid;
   gap: 8px;
 }
+.admin-field-type-select {
+  align-content: start;
+}
 
 .admin-field-full {
   grid-column: 1 / -1;
@@ -786,6 +789,19 @@ code,
 
 .admin-field select[multiple] {
   min-height: 168px;
+}
+.admin-field-type-select select {
+  max-width: 320px;
+}
+.admin-card-body > .admin-field {
+  margin-bottom: 8px;
+}
+.admin-card-body > .admin-field > select[data-role="resource-select"] {
+  min-height: 52px;
+}
+.admin-card-body > .admin-field > select[data-role="resource-select"] optgroup {
+  font-weight: 800;
+  color: var(--navy);
 }
 
 .admin-upload-field-group {

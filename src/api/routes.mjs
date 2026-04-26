@@ -183,7 +183,7 @@ const adminHintSchema = objectSchema(
       )
     },
     helperCommand: stringProperty('Commande locale d’aide pour générer un JWT si les variables sont configurées.', 'npm run admin-token'),
-    requiredEnvironment: arrayProperty('Variables d’environnement nécessaires côté serveur.', stringProperty('Nom de variable.'), ['TAIA_ADMIN_EDITOR_PASSWORD', 'TAIA_ADMIN_SUPER_PASSWORD'])
+    requiredEnvironment: arrayProperty('Variables d’environnement nécessaires côté serveur.', stringProperty('Nom de variable.'), ['TAIA_ADMIN_EDITOR_PASSWORD', 'TAIA_ADMIN_SUPER_PASSWORD', 'DATABASE_URL'])
   }
 );
 
@@ -234,8 +234,7 @@ const adminMediaResponseSchema = objectSchema(
       description: 'Indique si la ressource metier doit encore etre enregistree pour persister la nouvelle URL.',
       example: true
     },
-    message: stringProperty('Message de retour pour l’interface admin.', 'Image chargee. Enregistrez maintenant la ressource pour mettre a jour l URL.'),
-    storage: stringProperty('Mode de stockage effectivement utilise pour l upload media.', 'vercel-blob')
+    message: stringProperty('Message de retour pour l’interface admin.', 'Image chargee. Enregistrez maintenant la ressource pour mettre a jour l URL.')
   }
 );
 

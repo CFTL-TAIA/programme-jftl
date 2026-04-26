@@ -8,29 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
 const databaseDir = join(rootDir, 'BDD');
-const dataToken = process.env.bdd_READ_WRITE_TOKEN || process.env.BDD_READ_WRITE_TOKEN;
 const mediaToken = process.env.taia_READ_WRITE_TOKEN || process.env.TAIA_READ_WRITE_TOKEN;
+const supportedImageExtensions = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']);
 
 function requireToken(value, name) {
   if (!value) {
     throw new Error(`La variable ${name} est obligatoire pour le seed Blob.`);
-  }
-}
-
-async function uploadJsonFiles() {
-  const jsonFiles = ['Conference.json', 'Speakers.json', 'Salle.json', 'Entreprise.json'];
-
-  for (const fileName of jsonFiles) {
-    const payload = readFileSync(join(databaseDir, fileName), 'utf8');
-    await put(`Data/${fileName}`, payload, {
-      access: 'private',
-      token: dataToken,
-      allowOverwrite: true,
-      contentType: 'application/json; charset=utf-8',
-      cacheControlMaxAge: 60
-    });
-
-    console.log(`JSON seed -> Data/${fileName}`);
   }
 }
 
@@ -40,8 +23,9 @@ async function uploadMediaDirectory(localDirName, blobDirName) {
   for (const fileName of readdirSync(absoluteDir)) {
     const absoluteFilePath = join(absoluteDir, fileName);
     const stats = statSync(absoluteFilePath);
+    const extension = fileName.slice(fileName.lastIndexOf('.')).toLowerCase();
 
-    if (!stats.isFile()) {
+    if (!stats.isFile() || !supportedImageExtensions.has(extension)) {
       continue;
     }
 
@@ -57,11 +41,9 @@ async function uploadMediaDirectory(localDirName, blobDirName) {
   }
 }
 
-requireToken(dataToken, 'bdd_READ_WRITE_TOKEN');
 requireToken(mediaToken, 'taia_READ_WRITE_TOKEN');
 
-await uploadJsonFiles();
 await uploadMediaDirectory('photos', 'photos');
 await uploadMediaDirectory('logos', 'logos');
 
-console.log('Seed Blob termine.');
+console.log('Seed Blob medias termine.');

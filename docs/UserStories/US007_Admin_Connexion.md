@@ -17,3 +17,4 @@ En tant qu'administrateur du projet API TAIA, je veux obtenir un JWT quotidien a
 3. Le scope `editor` autorise la rubrique `Modifier` et les requetes `PUT` uniquement.
 4. Le scope `admin-plus` autorise les rubriques `Modifier`, `Creer`, `Supprimer` et les requetes `POST`, `PUT`, `DELETE`.
 5. L'interface admin masque les formulaires de gestion tant qu'aucun token valide n'a ete genere.
+6. La documentation de configuration mentionne aussi `DATABASE_URL` comme variable requise pour activer les CRUD metier dans l'environnement courant.

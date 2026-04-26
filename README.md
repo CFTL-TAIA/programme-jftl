@@ -20,11 +20,11 @@ La solution mise en place ici est donc la suivante :
 - Node.js sert a construire le front statique et la documentation Swagger
 - les routes API `/api/*` sont executees par de vraies fonctions serverless
 - le serveur local reutilise la meme logique API que Vercel
-- les reponses API sont alimentees par des fichiers de donnees JSON
+- les reponses API sont alimentees par Postgres pour les donnees metier et par Blob pour les medias quand le token est configure
 
 Point de fiabilite : les requetes API sont maintenant reelles en local et sur Vercel, donc testables depuis Bruno, Postman, Karate ou Swagger sans mock navigateur.
 
-Point de fiabilite a signaler : sur Vercel, les ecritures durables ne passent plus par le systeme de fichiers du runtime serverless. Le projet utilise maintenant Vercel Blob pour persister les JSON et les medias quand les tokens requis sont configures, avec un fallback local conserve pour le developpement.
+Point de fiabilite a signaler : les donnees metier utilisent maintenant Postgres via `DATABASE_URL`, en production comme en developpement. Vercel Blob est conserve pour les medias uniquement. Les JSON versionnes dans `BDD/` restent une source de seed mais ne sont plus utilises comme persistance runtime.
 
 ## Configuration admin
 
@@ -34,7 +34,7 @@ Variables d'environnement attendues cote serveur :
 
 - `TAIA_ADMIN_EDITOR_PASSWORD` : ouvre le scope `editor` et autorise `PUT`
 - `TAIA_ADMIN_SUPER_PASSWORD` : ouvre le scope `admin-plus` et autorise `POST`, `PUT`, `DELETE`
-- `bdd_READ_WRITE_TOKEN` : active la persistance distante des JSON via le store Blob prive `taia-bdd`
+- `DATABASE_URL` : active la persistance Postgres des donnees metier (`conference`, `speaker`, `salle`, `entreprise`) pour l'environnement courant
 - `taia_READ_WRITE_TOKEN` : active le stockage public des medias via le store Blob `taia-fichier`
 
 En local, le projet charge automatiquement un fichier `.env.local` a la racine si present.
@@ -45,16 +45,33 @@ Sur Vercel, configure-les dans les Environment Variables du projet.
 Flux recommande en local :
 
 1. Copier `.env.local.example` vers `.env.local`.
-2. Remplacer les deux valeurs par vos vrais mots de passe locaux.
-3. Lancer `npm run dev`.
-4. Generer un JWT de test avec `npm run admin-token` ou depuis la page admin.
+2. Choisir votre base de developpement :
+	- soit un Postgres local avec `npm run db:up`
+	- soit une base Neon dediee au dev avec son `DATABASE_URL`
+3. Remplacer les valeurs par vos vrais mots de passe locaux et votre `DATABASE_URL`.
+4. Initialiser la base avec `npm run seed-postgres`.
+5. Lancer `npm run dev`.
+6. Generer un JWT de test avec `npm run admin-token` ou depuis la page admin.
 
 Exemple de fichier `.env.local` :
 
 ```dotenv
 TAIA_ADMIN_EDITOR_PASSWORD=votre-mot-de-passe-editor
 TAIA_ADMIN_SUPER_PASSWORD=votre-mot-de-passe-admin-plus
+DATABASE_URL=postgresql://taia:taia@localhost:5432/taia
 ```
+
+Separation recommandee des bases :
+
+- une base `dev` pour le travail quotidien et les essais locaux
+- une base `prod` distincte pour Vercel Production
+- idealement une base `preview` ou une branche Neon dediee pour les tests de PR
+
+Concretement, cela signifie :
+
+- dans `.env.local`, garder la `DATABASE_URL` de developpement
+- dans Vercel `Production`, configurer la `DATABASE_URL` de production
+- dans Vercel `Preview`, configurer une `DATABASE_URL` differente si vous voulez tester les branches sans toucher la prod
 
 Regles importantes :
 
@@ -78,22 +95,13 @@ export TAIA_ADMIN_SUPER_PASSWORD="votre-mot-de-passe-admin-plus"
 npm run dev
 ```
 
-Pour forcer le mode local sur `localhost` meme si les tokens Blob sont presents dans `.env.local` :
-
-```dotenv
-TAIA_STORAGE_MODE=local
-```
-
-Avec cette option, le projet lit et ecrit a nouveau dans `BDD/*.json`, `BDD/photos` et `BDD/logos` pendant le developpement local.
-
-## Mode hybride local / Vercel Blob
+## Mode hybride local / Neon Postgres
 
 Le projet fonctionne maintenant en mode hybride pour la persistance :
 
-- sans token Blob, les lectures et ecritures continuent d'utiliser `BDD/*.json` et `BDD/photos|logos`
-- avec `bdd_READ_WRITE_TOKEN`, les fichiers `Conference.json`, `Speakers.json`, `Salle.json` et `Entreprise.json` sont lus et ecrits dans le dossier Blob prive `Data/`
+- avec `DATABASE_URL`, les fichiers metier sont lus et ecrits dans Postgres
 - avec `taia_READ_WRITE_TOKEN`, les photos et logos admin sont envoyes dans le dossier Blob public `medias/photos` ou `medias/logos`
-- avec `TAIA_STORAGE_MODE=local`, le localhost force le fallback disque meme si les tokens Blob sont presents
+- sans `taia_READ_WRITE_TOKEN`, les medias restent en fallback local sur `BDD/photos` et `BDD/logos`
 
 Pour recuperer les variables Vercel en local :
 
@@ -101,17 +109,39 @@ Pour recuperer les variables Vercel en local :
 vercel env pull
 ```
 
-Pour initialiser les stores Blob a partir de la BDD locale :
+Pour initialiser Postgres a partir de la BDD locale :
+
+```bash
+npm run seed-postgres
+```
+
+Pour demarrer un Postgres local via Docker :
+
+```bash
+npm run db:up
+```
+
+Pour l'arreter :
+
+```bash
+npm run db:down
+```
+
+Pour initialiser ensuite les medias Blob a partir de la BDD locale :
 
 ```bash
 npm run seed-blob
 ```
 
-Pre-requis du seed :
+Pre-requis du seed Postgres :
 
-- le store prive contient le dossier `Data`
+- `DATABASE_URL` ou `POSTGRES_URL` est disponible en local
+- la base cible est accessible
+
+Pre-requis du seed Blob :
+
 - le store public contient `medias/photos` et `medias/logos`
-- les variables `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN` sont disponibles en local
+- la variable `taia_READ_WRITE_TOKEN` est disponible en local
 
 Comportement admin recent a connaitre :
 
@@ -227,15 +257,29 @@ Exemple de reponse :
 
 ```bash
 npm run build
+npm run db:up
+npm run db:down
 npm run free-local-port
 npm run dev
+npm run seed-postgres
 ```
 
 `npm run free-local-port` tente de liberer automatiquement un ancien serveur Node local sur le port `8080` avant redemarrage.
 
 `npm run admin-token` aide a generer un JWT local uniquement si les variables d'environnement admin sont deja configurees.
 
-`npm run seed-blob` pousse les JSON de `BDD/` vers `Data/` dans Blob prive, puis les photos et logos vers `medias/` dans Blob public.
+`npm run seed-postgres` pousse les JSON de `BDD/` vers Postgres.
+
+`npm run seed-blob` pousse les photos et logos vers `medias/` dans Blob public.
+
+Pas a pas local recommande avec la configuration actuelle :
+
+1. Mettre la `DATABASE_URL` de dev dans `.env.local`.
+2. Lancer `npm run seed-postgres` pour charger `BDD/*.json` dans la base de dev.
+3. Lancer `npm run seed-blob` si tu veux aussi precharger le store media de dev.
+4. Lancer `npm run dev`.
+5. Ouvrir `http://localhost:8080/admin/` et tester les CRUD sur la base Postgres de dev.
+6. Conserver la `DATABASE_URL` de prod uniquement dans les variables Vercel `Production`.
 
 Verification locale minimale des mots de passe :
 
