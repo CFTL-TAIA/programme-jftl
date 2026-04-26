@@ -1166,7 +1166,7 @@
                           },
                           "photo": {
                             "type": "string",
-                            "description": "Chemin vers la photo du speaker."
+                            "description": "Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et 1200 x 1600 px."
                           },
                           "entreprise": {
                             "type": "string",
@@ -1517,7 +1517,7 @@
                   },
                   "photo": {
                     "type": "string",
-                    "description": "Chemin vers la photo du speaker."
+                    "description": "Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et 1200 x 1600 px."
                   },
                   "entreprise": {
                     "type": "string",
@@ -1571,7 +1571,7 @@
                         },
                         "photo": {
                           "type": "string",
-                          "description": "Chemin vers la photo du speaker."
+                          "description": "Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et 1200 x 1600 px."
                         },
                         "entreprise": {
                           "type": "string",
@@ -1645,7 +1645,7 @@
                   },
                   "photo": {
                     "type": "string",
-                    "description": "Chemin vers la photo du speaker."
+                    "description": "Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et 1200 x 1600 px."
                   },
                   "entreprise": {
                     "type": "string",
@@ -1699,7 +1699,7 @@
                         },
                         "photo": {
                           "type": "string",
-                          "description": "Chemin vers la photo du speaker."
+                          "description": "Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et 1200 x 1600 px."
                         },
                         "entreprise": {
                           "type": "string",
@@ -2344,7 +2344,7 @@
                           },
                           "logo": {
                             "type": "string",
-                            "description": "Chemin vers le logo."
+                            "description": "Chemin ou URL publique du logo. Upload admin limite a 2 Mo et 1600 x 800 px."
                           },
                           "siteUrl": {
                             "type": "string",
@@ -2607,7 +2607,7 @@
                   },
                   "logo": {
                     "type": "string",
-                    "description": "Chemin vers le logo."
+                    "description": "Chemin ou URL publique du logo. Upload admin limite a 2 Mo et 1600 x 800 px."
                   },
                   "siteUrl": {
                     "type": "string",
@@ -2656,7 +2656,7 @@
                         },
                         "logo": {
                           "type": "string",
-                          "description": "Chemin vers le logo."
+                          "description": "Chemin ou URL publique du logo. Upload admin limite a 2 Mo et 1600 x 800 px."
                         },
                         "siteUrl": {
                           "type": "string",
@@ -2725,7 +2725,7 @@
                   },
                   "logo": {
                     "type": "string",
-                    "description": "Chemin vers le logo."
+                    "description": "Chemin ou URL publique du logo. Upload admin limite a 2 Mo et 1600 x 800 px."
                   },
                   "siteUrl": {
                     "type": "string",
@@ -2774,7 +2774,7 @@
                         },
                         "logo": {
                           "type": "string",
-                          "description": "Chemin vers le logo."
+                          "description": "Chemin ou URL publique du logo. Upload admin limite a 2 Mo et 1600 x 800 px."
                         },
                         "siteUrl": {
                           "type": "string",
@@ -3086,6 +3086,113 @@
           },
           "400": {
             "description": "Requete invalide ou validation echouee."
+          }
+        }
+      }
+    },
+    "/api/admin/media": {
+      "post": {
+        "summary": "Charger une image admin",
+        "description": "Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a 1200 x 1600 px. Logos limites a 1600 x 800 px. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif.",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Charge une image admin en base64 pour obtenir une URL publique ou un chemin local selon le mode de stockage actif.",
+                "required": [
+                  "fieldName",
+                  "fileNameStem",
+                  "dataUrl"
+                ],
+                "properties": {
+                  "resourceType": {
+                    "type": "string",
+                    "description": "Type de ressource en cours d’edition."
+                  },
+                  "fieldName": {
+                    "type": "string",
+                    "description": "Champ media cible.",
+                    "enum": [
+                      "photo",
+                      "logo"
+                    ]
+                  },
+                  "currentPath": {
+                    "type": "string",
+                    "description": "Chemin ou URL actuelle si un media existe deja."
+                  },
+                  "fileNameStem": {
+                    "type": "string",
+                    "description": "Base de nom de fichier utilisee pour produire le nom final du media."
+                  },
+                  "dataUrl": {
+                    "type": "string",
+                    "description": "Image en data URL base64. Taille maximale 2097152 octets. Photos max 1200 x 1600 px. Logos max 1600 x 800 px."
+                  }
+                }
+              },
+              "example": {
+                "resourceType": "speaker",
+                "fieldName": "photo",
+                "currentPath": "",
+                "fileNameStem": "bruno-legeard",
+                "dataUrl": "data:image/jpeg;base64,/9j/..."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reponse du service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Resultat d’un chargement media admin.",
+                  "required": [
+                    "publicPath",
+                    "requiresResourceSave",
+                    "message"
+                  ],
+                  "properties": {
+                    "publicPath": {
+                      "type": "string",
+                      "description": "URL publique Blob ou chemin local de preview du media charge."
+                    },
+                    "requiresResourceSave": {
+                      "type": "boolean",
+                      "description": "Indique si la ressource metier doit encore etre enregistree pour persister la nouvelle URL."
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Message de retour pour l’interface admin."
+                    }
+                  }
+                },
+                "example": {
+                  "publicPath": "https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg",
+                  "requiresResourceSave": false,
+                  "message": "Image chargee avec succes."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requete invalide ou validation echouee."
+          },
+          "401": {
+            "description": "JWT manquant, invalide ou scope insuffisant."
           }
         }
       }

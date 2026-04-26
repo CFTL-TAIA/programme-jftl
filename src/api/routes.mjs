@@ -1,4 +1,7 @@
 const conferenceTypeEnum = ['session', 'keynote', 'sponsor', 'networking', 'demo', 'closing'];
+const mediaUploadMaxBytes = 2 * 1024 * 1024;
+const photoMaxDimensions = '1200 x 1600 px';
+const logoMaxDimensions = '1600 x 800 px';
 
 function stringProperty(description, example, format) {
   return {
@@ -69,14 +72,14 @@ const speakerSchema = objectSchema(
     id: stringProperty('Identifiant technique unique du speaker.', 'spk-bruno-legeard'),
     nom: stringProperty('Nom du speaker.', 'Legeard'),
     prenom: stringProperty('Prénom du speaker.', 'Bruno'),
-    photo: stringProperty('Chemin vers la photo du speaker.', '/BDD/photos/bruno-legeard.jpg'),
+    photo: stringProperty(`Chemin ou URL publique de la photo du speaker. Upload admin limite a 2 Mo et ${photoMaxDimensions}.`, 'https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg'),
     entreprise: stringProperty('Identifiant de l’entreprise rattachée.', 'ent-smartesting')
   },
   {
     id: 'spk-bruno-legeard',
     nom: 'Legeard',
     prenom: 'Bruno',
-    photo: '/BDD/photos/bruno-legeard.jpg',
+    photo: 'https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg',
     entreprise: 'ent-smartesting'
   }
 );
@@ -104,13 +107,13 @@ const entrepriseSchema = objectSchema(
   {
     id: stringProperty('Identifiant technique unique de l’entreprise.', 'ent-smartesting'),
     nomEntreprise: stringProperty('Nom affiché de l’entreprise.', 'Smartesting'),
-    logo: stringProperty('Chemin vers le logo.', '/BDD/logos/smartesting.png'),
+    logo: stringProperty(`Chemin ou URL publique du logo. Upload admin limite a 2 Mo et ${logoMaxDimensions}.`, 'https://example.public.blob.vercel-storage.com/medias/logos/smartesting.png'),
     siteUrl: stringProperty('URL du site de l’entreprise.', 'https://www.smartesting.com/', 'uri')
   },
   {
     id: 'ent-smartesting',
     nomEntreprise: 'Smartesting',
-    logo: '/BDD/logos/smartesting.png',
+    logo: 'https://example.public.blob.vercel-storage.com/medias/logos/smartesting.png',
     siteUrl: 'https://www.smartesting.com/'
   }
 );
@@ -201,6 +204,37 @@ const adminTokenResponseSchema = objectSchema(
     scope: stringProperty('Scope accordé au token.', 'editor'),
     permissions: arrayProperty('Permissions accordées.', stringProperty('Permission accordée.'), ['read', 'update']),
     message: stringProperty('Message de confirmation.', 'Token admin genere avec succes.')
+  }
+);
+
+const adminMediaRequestSchema = objectSchema(
+  'Charge une image admin en base64 pour obtenir une URL publique ou un chemin local selon le mode de stockage actif.',
+  ['fieldName', 'fileNameStem', 'dataUrl'],
+  {
+    resourceType: stringProperty('Type de ressource en cours d’edition.', 'speaker'),
+    fieldName: {
+      type: 'string',
+      description: 'Champ media cible.',
+      enum: ['photo', 'logo'],
+      example: 'photo'
+    },
+    currentPath: stringProperty('Chemin ou URL actuelle si un media existe deja.', 'https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg'),
+    fileNameStem: stringProperty('Base de nom de fichier utilisee pour produire le nom final du media.', 'bruno-legeard'),
+    dataUrl: stringProperty(`Image en data URL base64. Taille maximale ${mediaUploadMaxBytes} octets. Photos max ${photoMaxDimensions}. Logos max ${logoMaxDimensions}.`, 'data:image/jpeg;base64,/9j/...')
+  }
+);
+
+const adminMediaResponseSchema = objectSchema(
+  'Resultat d’un chargement media admin.',
+  ['publicPath', 'requiresResourceSave', 'message'],
+  {
+    publicPath: stringProperty('URL publique Blob ou chemin local de preview du media charge.', 'https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg'),
+    requiresResourceSave: {
+      type: 'boolean',
+      description: 'Indique si la ressource metier doit encore etre enregistree pour persister la nouvelle URL.',
+      example: true
+    },
+    message: stringProperty('Message de retour pour l’interface admin.', 'Image chargee. Enregistrez maintenant la ressource pour mettre a jour l URL.')
   }
 );
 
@@ -621,6 +655,30 @@ export const apiRoutes = [
       scope: 'editor',
       permissions: ['read', 'update'],
       message: 'Token admin genere avec succes.'
+    },
+    queryParameters: []
+  },
+  {
+    id: 'admin-media-upload',
+    method: 'POST',
+    path: '/api/admin/media',
+    summary: 'Charger une image admin',
+    description: `Charge une photo de speaker ou un logo d entreprise. Taille maximale 2 Mo. Photos limitees a ${photoMaxDimensions}. Logos limites a ${logoMaxDimensions}. En production, l upload cible Vercel Blob ; en local sans token Blob, un fallback sur le systeme de fichiers reste actif.`,
+    tags: ['Admin'],
+    requiresAuth: true,
+    requestBodySchema: adminMediaRequestSchema,
+    requestBodyExample: {
+      resourceType: 'speaker',
+      fieldName: 'photo',
+      currentPath: '',
+      fileNameStem: 'bruno-legeard',
+      dataUrl: 'data:image/jpeg;base64,/9j/...'
+    },
+    responseSchema: adminMediaResponseSchema,
+    exampleResponse: {
+      publicPath: 'https://example.public.blob.vercel-storage.com/medias/photos/bruno-legeard.jpg',
+      requiresResourceSave: false,
+      message: 'Image chargee avec succes.'
     },
     queryParameters: []
   }

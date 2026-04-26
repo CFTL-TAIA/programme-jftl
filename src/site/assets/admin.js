@@ -52,7 +52,11 @@ const resourceConfigs = {
           label: 'Charger une photo',
           accept: 'image/*,.svg,.webp',
           hideTextInput: true,
-          nameSource: (payload) => `${payload.prenom || ''} ${payload.nom || ''}`
+          nameSource: (payload) => `${payload.prenom || ''} ${payload.nom || ''}`,
+          maxSizeBytes: 2 * 1024 * 1024,
+          maxWidth: 1200,
+          maxHeight: 1600,
+          helperText: 'PNG, JPG, GIF, SVG ou WebP. Taille max 2 Mo. Dimensions max 1200 x 1600 px.'
         }
       },
       { name: 'entreprise', label: 'Entreprise', type: 'select', optionsFrom: 'entreprise', optionLabel: (item) => item.nomEntreprise, emptyLabel: 'Aucune entreprise communiquée' }
@@ -92,7 +96,11 @@ const resourceConfigs = {
           label: 'Charger un logo',
           accept: 'image/*,.svg,.webp',
           hideTextInput: true,
-          nameSource: (payload) => payload.nomEntreprise || ''
+          nameSource: (payload) => payload.nomEntreprise || '',
+          maxSizeBytes: 2 * 1024 * 1024,
+          maxWidth: 1600,
+          maxHeight: 800,
+          helperText: 'PNG, JPG, GIF, SVG ou WebP. Taille max 2 Mo. Dimensions max 1600 x 800 px.'
         }
       },
       { name: 'siteUrl', label: 'Site web', type: 'url', placeholder: 'https://example.test/' }
@@ -363,6 +371,7 @@ function buildFieldMarkup(resourceType, field, value, mode) {
           <div class="admin-upload-heading">
             <span>${escapeHtml(label)}</span>
             <p class="admin-upload-current">${currentValue ? 'Fichier actuellement enregistré.' : 'Aucun fichier chargé pour le moment.'}</p>
+            <p class="admin-upload-rules">${escapeHtml(field.upload.helperText || '')}</p>
           </div>
           ${buildMediaPreviewMarkup(field, currentValue)}
           <input id="${fieldId}" name="${field.name}" type="hidden" value="${escapeHtml(String(currentValue))}" />
@@ -660,6 +669,38 @@ function readFileAsDataUrl(file) {
   });
 }
 
+function readImageDimensions(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      const dimensions = { width: image.naturalWidth, height: image.naturalHeight };
+      URL.revokeObjectURL(objectUrl);
+      resolve(dimensions);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('Impossible de lire les dimensions du fichier.'));
+    };
+
+    image.src = objectUrl;
+  });
+}
+
+async function validateMediaFile(field, file) {
+  if (file.size > field.upload.maxSizeBytes) {
+    throw new Error('Le fichier depasse la taille maximale autorisee de 2 Mo.');
+  }
+
+  const { width, height } = await readImageDimensions(file);
+
+  if (width > field.upload.maxWidth || height > field.upload.maxHeight) {
+    throw new Error(`Les dimensions maximales autorisees sont ${field.upload.maxWidth} x ${field.upload.maxHeight} px.`);
+  }
+}
+
 async function uploadMediaFile({ card, form, resourceType, mode, field, file }) {
   const payload = normalizeFormPayload(resourceType, form);
   const selectedItem = mode === 'update' ? getSelectedItem(resourceType, 'update') : null;
@@ -788,6 +829,7 @@ function bindCard(container, resourceType, mode) {
       }
 
       try {
+        await validateMediaFile(field, file);
         updateCardFeedback(card, 'Chargement de l’image en cours...');
         await uploadMediaFile({ card, form, resourceType, mode, field, file });
       } catch (error) {

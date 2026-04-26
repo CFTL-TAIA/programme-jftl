@@ -13,7 +13,12 @@
     "clean": "node ./scripts/clean.mjs",
     "dev": "npm run build && npm run free-local-port && node ./scripts/preview.mjs",
     "free-local-port": "node ./scripts/free-local-port.mjs",
+    "seed-blob": "node ./scripts/seed-blob.mjs",
     "start": "node ./scripts/preview.mjs",
     "vercel-build": "node ./scripts/build.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.3.3",
+    "image-size": "^2.0.2"
   }
 }

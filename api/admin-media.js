@@ -30,7 +30,7 @@ export default async function handler(request, response) {
       return;
     }
 
-    sendJson(response, saveAdminMedia(payload));
+    sendJson(response, await saveAdminMedia(payload));
   } catch (error) {
     if (error instanceof SyntaxError) {
       sendBadRequest(response, 'Corps JSON invalide.');
@@ -42,7 +42,15 @@ export default async function handler(request, response) {
       return;
     }
 
-    if (error.message.includes('obligatoire') || error.message.includes('supporté') || error.message.includes('nom de fichier') || error.message.includes('encodée')) {
+    if (
+      error.message.includes('obligatoire') ||
+      error.message.includes('support') ||
+      error.message.includes('nom de fichier') ||
+      error.message.includes('taille maximale') ||
+      error.message.includes('dimensions maximales') ||
+      error.message.includes('Impossible de determiner les dimensions') ||
+      error.message.includes('encodee')
+    ) {
       sendBadRequest(response, error.message);
       return;
     }

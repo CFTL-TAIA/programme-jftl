@@ -54,8 +54,8 @@ function copySwaggerUi() {
   cpSync(join(swaggerDocsDir, 'index.html'), join(targetDir, 'index.html'));
 }
 
-function writeGeneratedArtifacts() {
-  const openApiDocument = JSON.stringify(buildOpenApiDocument(), null, 2);
+async function writeGeneratedArtifacts() {
+  const openApiDocument = JSON.stringify(await buildOpenApiDocument(), null, 2);
   writeFileSync(join(swaggerDocsDir, 'openapi.json'), openApiDocument + '\n');
   writeFileSync(join(distDir, 'docs', 'Swagger', 'openapi.json'), openApiDocument + '\n');
 }
@@ -65,5 +65,5 @@ copySite();
 copyPublicPhotos();
 copyPublicLogos();
 copySwaggerUi();
-writeGeneratedArtifacts();
+await writeGeneratedArtifacts();
 writeNoJekyll();

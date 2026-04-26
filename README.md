@@ -34,6 +34,8 @@ Variables d'environnement attendues cote serveur :
 
 - `TAIA_ADMIN_EDITOR_PASSWORD` : ouvre le scope `editor` et autorise `PUT`
 - `TAIA_ADMIN_SUPER_PASSWORD` : ouvre le scope `admin-plus` et autorise `POST`, `PUT`, `DELETE`
+- `bdd_READ_WRITE_TOKEN` : active la persistance distante des JSON via le store Blob prive `taia-bdd`
+- `taia_READ_WRITE_TOKEN` : active le stockage public des medias via le store Blob `taia-fichier`
 
 En local, le projet charge automatiquement un fichier `.env.local` a la racine si present.
 Sur Vercel, configure-les dans les Environment Variables du projet.
@@ -75,6 +77,32 @@ export TAIA_ADMIN_EDITOR_PASSWORD="votre-mot-de-passe-editor"
 export TAIA_ADMIN_SUPER_PASSWORD="votre-mot-de-passe-admin-plus"
 npm run dev
 ```
+
+## Mode hybride local / Vercel Blob
+
+Le projet fonctionne maintenant en mode hybride pour la persistance :
+
+- sans token Blob, les lectures et ecritures continuent d'utiliser `BDD/*.json` et `BDD/photos|logos`
+- avec `bdd_READ_WRITE_TOKEN`, les fichiers `Conference.json`, `Speakers.json`, `Salle.json` et `Entreprise.json` sont lus et ecrits dans le dossier Blob prive `Data/`
+- avec `taia_READ_WRITE_TOKEN`, les photos et logos admin sont envoyes dans le dossier Blob public `medias/photos` ou `medias/logos`
+
+Pour recuperer les variables Vercel en local :
+
+```bash
+vercel env pull
+```
+
+Pour initialiser les stores Blob a partir de la BDD locale :
+
+```bash
+npm run seed-blob
+```
+
+Pre-requis du seed :
+
+- le store prive contient le dossier `Data`
+- le store public contient `medias/photos` et `medias/logos`
+- les variables `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN` sont disponibles en local
 
 ## Zone BDD
 
@@ -131,6 +159,7 @@ Endpoints disponibles :
 - `POST /api/speaker`, `PUT /api/speaker`, `DELETE /api/speaker`
 - `POST /api/salle`, `PUT /api/salle`, `DELETE /api/salle`
 - `POST /api/entreprise`, `PUT /api/entreprise`, `DELETE /api/entreprise`
+- `POST /api/admin/media`
 
 Exemples de filtres :
 
@@ -189,6 +218,8 @@ npm run dev
 `npm run free-local-port` tente de liberer automatiquement un ancien serveur Node local sur le port `8080` avant redemarrage.
 
 `npm run admin-token` aide a generer un JWT local uniquement si les variables d'environnement admin sont deja configurees.
+
+`npm run seed-blob` pousse les JSON de `BDD/` vers `Data/` dans Blob prive, puis les photos et logos vers `medias/` dans Blob public.
 
 Verification locale minimale des mots de passe :
 

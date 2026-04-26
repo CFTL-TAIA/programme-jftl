@@ -529,6 +529,57 @@ Validation effectuee : `npm run build` passe et aucune erreur n'est remontee sur
 ### Prompt utilisateur
 
 ```text
+Voila ce que j'ai fait sous vercel Blog :
+- crée "taia-bdd" pour la BDD en privé
+-- Création d'un dossier "Data"
+- crée "taia-fichier" pour les fichiers en public
+-- Création d'un dossier "medias" avec 2 dossiers photos et logos
+Cela a crée les 2 variables d'environnements suivantes :
+- bdd_READ_WRITE_TOKEN
+- taia_READ_WRITE_TOKEN
+
+On peut installer vercel/blob (comment faire?)
+Je valide le mode hybride carrément adapté et me permettant de faire des tests en local.
+Merci de m'indiquer ce que je peux te donner depuis Vercel comme information pour permettre d'adapter les scripts.
+
+En plus, il faudra prévoir la modification suivante : Ajouter un message d'alerte et un contrôle API pour les fichiers qui ne doivent pas faire plus de 2Mo. On indique un message dans tous les loaders, et si l'image est plus grosse que la taille maxi, on mets un message d'erreur.
+Prévoir aussi une taille Largeur x Longueur maximum, adapté à ce type d'affichage.
+
+Pense bien, en plus des demandes au dessus, à :
+- Mettre à jour le handoff.md
+- Remplir le chat.md de nos conversations
+- Mettre à jour les US / Cas de tests
+- Mettre à jour le swagger avec les informations fonctionnelles importantes.
+```
+
+### Reponse finale
+
+```text
+J'ai branche `@vercel/blob` dans le projet et ajoute un mode hybride de persistance.
+
+Concretement :
+- avec `bdd_READ_WRITE_TOKEN`, les CRUD JSON lisent et ecrivent dans Blob prive sous `Data/`
+- avec `taia_READ_WRITE_TOKEN`, les uploads admin publient les medias dans Blob public sous `medias/photos` et `medias/logos`
+- sans tokens Blob, le projet garde un fallback local sur `BDD/` pour continuer a travailler simplement en local
+
+J'ai aussi ajoute un script `npm run seed-blob` pour pousser les JSON et les medias locaux vers les stores Blob deja crees.
+
+Pour les uploads admin, les controles sont maintenant en place cote navigateur et cote API :
+- taille maximale `2 Mo`
+- photo speaker : `1200 x 1600 px`
+- logo entreprise : `1600 x 800 px`
+
+Swagger a ete enrichi pour documenter `POST /api/admin/media` et les contraintes fonctionnelles des champs `photo` et `logo`.
+Le handoff, la documentation Vercel, le README, le journal de session et les user stories / cas de test ont aussi ete mis a jour.
+
+Information encore utile a partager depuis Vercel si besoin de debug plus fin : uniquement les noms exacts des variables d'environnement, les prefixes de dossiers retenus et, si un comportement Blob reste anormal, le message d'erreur brut. Je n'ai pas besoin du token en clair pour adapter le code.
+```
+
+## Echange suivant
+
+### Prompt utilisateur
+
+```text
 Admin toujours
 pourrait on charger et afficher la photo presente pour permettre de voir si on a besoin de la changer?
 

@@ -18,7 +18,7 @@
 
 - Node.js est utilise pour construire le site statique et pour executer l'API localement
 - Vercel expose les routes `/api/*` comme fonctions serverless reelles
-- Les reponses API sont construites depuis des fichiers de donnees JSON versionnes dans `BDD/`
+- Les reponses API sont construites depuis des fichiers de donnees JSON versionnes dans `BDD/`, avec un mode hybride Blob/local pour les lectures et ecritures quand les tokens de stockage sont presents
 - Le serveur local `scripts/preview.mjs` reutilise la meme logique que les fonctions serverless
 - Le Swagger consomme le fichier OpenAPI genere et peut executer des requetes vers la vraie API sur le meme site
 - La page Swagger charge maintenant `swagger-ui-dist@5.32.4` via CDN pour repartir d'une base UI a jour avant toute personnalisation supplementaire
@@ -29,7 +29,9 @@
 - Les conferences portent maintenant un champ `type` persiste dans `BDD/Conference.json`
 - L'admin repose sur un JWT quotidien a scopes : `editor` pour modifier, `admin-plus` pour creer et supprimer en plus
 - Les mots de passe admin sont exclusivement attendus via variables d'environnement cote serveur
-- L'admin permet aussi un upload direct de photos et logos en local, avec copie dans `BDD/` et `dist/BDD/` pour un rendu immediat en preview
+- L'admin permet aussi un upload direct de photos et logos avec deux modes : Blob public sur Vercel si `taia_READ_WRITE_TOKEN` est present, ou fallback local avec copie dans `BDD/` et `dist/BDD/`
+- Les CRUD JSON basculent sur Blob prive `Data/` si `bdd_READ_WRITE_TOKEN` est present, sinon restent sur `BDD/*.json`
+- Les uploads admin sont limites a 2 Mo et controles aussi sur les dimensions : photo `1200 x 1600 px`, logo `1600 x 800 px`
 
 ## Sources principales
 
@@ -40,6 +42,7 @@
 - `BDD/` : donnees JSON servant de base aux reponses et emplacement des photos et logos
 - `scripts/build.mjs` : generation du site et du fichier OpenAPI
 - `scripts/print-admin-token.mjs` : generation locale d'un JWT admin de test
+- `scripts/seed-blob.mjs` : pousse les JSON et medias locaux vers les stores Blob Vercel
 - `src/site/` : front programme, espace API et pages detaillees
 - `docs/Swagger/index.html` : interface Swagger
 - `lib/admin-media.mjs` : logique de stockage local des photos et logos uploades depuis l'admin
@@ -52,16 +55,17 @@ npm run build
 npm run free-local-port
 npm run dev
 npm run admin-token
+npm run seed-blob
 ```
 
 ## Points d'attention
 
 - Toute nouvelle route doit etre ajoutee dans `src/api/routes.mjs`, puis implementee ou branchee dans `api/`
 - Toute evolution de l'admin doit conserver l'absence de secret dans le code, Swagger et les docs versionnees
-- Toute modification durable de la BDD via API necessitera une persistance externe, car les fichiers locaux sur Vercel ne sont pas fiables pour l'ecriture persistante
-- Les JSON de `BDD/` sont adaptes pour la lecture et pour les tests locaux
+- Les JSON de `BDD/` restent la source de seed et le fallback local, mais la persistance distante cible maintenant Vercel Blob avec `bdd_READ_WRITE_TOKEN`
 - Les ecritures API locales sont maintenant validees cote serveur avant persistance des fichiers JSON
-- Les uploads admin de photos et logos ecrivent bien en local, mais ne constituent pas une persistance fiable sur Vercel sans stockage externe
+- Les uploads admin de photos et logos ecrivent en Blob public sur Vercel quand `taia_READ_WRITE_TOKEN` est present ; sinon ils restent copies localement pour le preview
+- Les variables de stockage attendues sont `bdd_READ_WRITE_TOKEN` et `taia_READ_WRITE_TOKEN`
 - Le programme source correspond a la JFTL du 9 juin 2026 au Beffroi de Montrouge, reconstruit depuis `docs/Programme-JFTL26.pdf` puis consolide avec la page officielle CFTL
 - Les liaisons conferences > speakers > salles sont a jour dans les trois fichiers JSON de `BDD/`
 - Les liaisons speakers > entreprises sont presentes dans `BDD/Speakers.json` et `BDD/Entreprise.json`
@@ -78,6 +82,6 @@ npm run admin-token
 
 ## Prochaines etapes pertinentes
 
-- Brancher une persistance distante si l'admin doit ecrire de maniere fiable sur Vercel
+- Executer `npm run seed-blob` une premiere fois avec les tokens Vercel pour initialiser `Data/` et `medias/`
 - Ajouter des tests automatiques de filtrage, d'authentification et de scopes admin
 - Ajouter des tests de navigation front pour les pages programme, conferences, speakers, salles, entreprises et admin

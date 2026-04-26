@@ -27,6 +27,8 @@ Deployer le projet sur Vercel avec :
 5. Ajouter les deux variables suivantes :
    - `TAIA_ADMIN_EDITOR_PASSWORD`
    - `TAIA_ADMIN_SUPER_PASSWORD`
+   - `bdd_READ_WRITE_TOKEN`
+   - `taia_READ_WRITE_TOKEN`
 6. Saisir vos vraies valeurs secretes pour chaque environnement cible.
 7. Relancer un deploiement apres ajout ou modification des variables.
 
@@ -70,18 +72,41 @@ Vercel ne lit pas ce fichier depuis le depot pour vos secrets runtime :
 - les secrets locaux restent dans `.env.local`
 - les secrets Vercel doivent etre configures dans le dashboard Vercel
 
-## Limite technique importante
+Pour recuperer aussi les variables Blob en local :
 
-Information fiable : Vercel serverless permet de servir correctement les endpoints HTTP et convient bien a ce projet pour les lectures JSON et les tests d'API.
+```bash
+vercel env pull
+```
 
-Contrainte produit a retenir : l'ecriture dans les fichiers JSON locaux n'est pas une persistance fiable sur Vercel, car le systeme de fichiers d'execution est ephemere.
+## Persistance Blob retenue
 
-Conclusion :
+Le projet s'appuie maintenant sur deux stores Blob Vercel :
 
-- lecture JSON : adaptee localement et sur Vercel
-- ecriture JSON persistante sur Vercel : non fiable
+- `taia-bdd` en prive pour les JSON metier, sous `Data/`
+- `taia-fichier` en public pour les medias, sous `medias/photos` et `medias/logos`
 
-Si vous souhaitez conserver durablement les creations, modifications et suppressions faites depuis l'admin sur Vercel, il faudra brancher une persistance distante comme Vercel KV, Postgres, Blob ou une autre base externe.
+Mode de fonctionnement :
+
+- sur Vercel avec `bdd_READ_WRITE_TOKEN`, les CRUD JSON lisent et ecrivent dans Blob prive
+- sur Vercel avec `taia_READ_WRITE_TOKEN`, les uploads admin publient les medias dans Blob public
+- en local sans token, le projet garde un fallback sur `BDD/` pour ne pas imposer Blob a chaque developpeur
+
+Commande utile pour initialiser les stores a partir des fichiers versionnes :
+
+```bash
+npm run seed-blob
+```
+
+## Contraintes d'upload admin
+
+- taille maximale : `2 Mo`
+- photo speaker : `1200 x 1600 px` maximum
+- logo entreprise : `1600 x 800 px` maximum
+
+Le controle est fait a deux niveaux :
+
+- message preventif et blocage dans l'interface admin
+- verification API cote serveur sur `/api/admin/media`
 
 ## Checklist rapide premier deploiement
 
@@ -89,6 +114,9 @@ Si vous souhaitez conserver durablement les creations, modifications et suppress
 2. `npm run dev` fonctionne sur `http://localhost:8080`
 3. `TAIA_ADMIN_EDITOR_PASSWORD` configure sur Vercel
 4. `TAIA_ADMIN_SUPER_PASSWORD` configure sur Vercel
-5. deploy relance apres ajout des variables
-6. test de `/api/admin/token` effectue
-7. test Swagger effectue sur l'URL Vercel
+5. `bdd_READ_WRITE_TOKEN` configure sur Vercel
+6. `taia_READ_WRITE_TOKEN` configure sur Vercel
+7. deploy relance apres ajout des variables
+8. test de `/api/admin/token` effectue
+9. test Swagger effectue sur l'URL Vercel
+10. test de `/api/admin/media` effectue avec une image < 2 Mo
